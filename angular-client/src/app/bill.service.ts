@@ -15,7 +15,7 @@ export class BillService {
     return this.http.get<Bills[]>(`${this.baseUrl}api/Bills`)
       .toPromise();
   }
-  createBills(bill: Bills){
+  createBills(bill: Bills) {
     return this.http.post<Bills>(`${this.baseUrl}api/Bills`, bill)
       .toPromise();
   }

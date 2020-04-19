@@ -1,40 +1,46 @@
 <h1>Bill List</h1>
-<div *ngIf="bills.length > 0">
-  <ol>
-    <li *ngFor="let bill of bills">
-        UserID: {{ bill.userId }} <br> 
-        Item: {{ bill.purchaseName }} <br> 
-        Quantity: {{ bill.quantity }} <br>
-        Cost: ${{ bill.cost }} <br>
-        BillDate: {{ bill.billDate }} <br>
-        Location: {{ bill.location }} <br>
-    </li>
-  </ol>
-</div>
-<div *ngIf="bills.length === 0">
-  no bills found
-</div>
-<button (click)="getBills()">Refresh Bills</button><br><br />
-<h1>Create New Bill: </h1>
-<form [formGroup]="createBillsForm" (ngSubmit)="createBills()">
-    <label>
-      UserID:
-      <input type="text" formControlName="UserID" required> <br>
-      Purchase Name:
-      <input type="text" formControlName="purchaseName" required> <br>
-      Quantity:
-      <input type="text" formControlName="quantity" required> <br>
-      Cost:
-      <input type="text" formControlName="cost" required> <br>
-      Date:
-      <input type="datetime-local" formControlName="billDate" required> <br>
-      Location:
-      <input type="text" formControlName="location" required>
-    </label>
-  
-    <button type="submit" [disabled]="!createBillsForm.valid">Submit</button>
-  </form>
-  
-  <div *ngIf="error" class="error">
-    {{ error }}
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 mx-auto">
+      <div *ngIf="bills.length > 0">
+        <ol>
+          <li *ngFor="let bill of bills">
+            UserID: {{ bill.userId }} <br>
+            Item: {{ bill.purchaseName }} <br>
+            Quantity: {{ bill.quantity }} <br>
+            Cost: ${{ bill.cost }} <br>
+            BillDate: {{ bill.billDate }} <br>
+            Location: {{ bill.location }} <br>
+          </li>
+        </ol>
+      </div>
+      <div *ngIf="bills.length === 0">
+        no bills found
+      </div>
+      <button (click)="getBills()">Refresh Bills</button><br><br />
+      <h1>Create New Bill: </h1>
+      <form [formGroup]="createBillsForm" (ngSubmit)="createBills()">
+        <label>
+          UserID:
+          <input type="text" class="form-control" formControlName="UserID" required>
+          Purchase Name:
+          <input type="text" class="form-control" formControlName="purchaseName" required>
+          Quantity:
+          <input type="text" class="form-control" formControlName="quantity" required>
+          Cost:
+          <input type="text" class="form-control" formControlName="cost" required>
+          Date:
+          <input type="datetime-local" class="form-control" formControlName="billDate" required>
+          Location:
+          <input type="text" class="form-control" formControlName="location" required>
+        </label>
+
+        <button type="submit" class="btn btn-block btn-success" [disabled]="!createBillsForm.valid">Submit</button>
+      </form>
+
+      <div *ngIf="error" class="error">
+        {{ error }}
+      </div>
+    </div>
   </div>
+</div>
