@@ -4,20 +4,36 @@
       <div class="card-group">
         <div class="card p-4">
           <div class="card-body">
-            <form name="form" (ngSubmit)="login()" #f="ngForm">
-              <h1 style="text-align:center">Login</h1>
+            
+           
+            <form name="form" #f="ngForm"  (ngSubmit)="Login(f)"  >
+              <h1 style="text-align:center">Login ID</h1>
 
-              <input type="text" name="id" [(ngModel)]="model.id" class="form-control sty1" placeholder="ID" required>
+              <input type="text" name="id" ngModel required #first="ngModel"  class="form-control sty1" placeholder="ID" required>
 
-
-              <input type="password" name="Password" [(ngModel)]="model.Password" class="form-control"
-                placeholder="Password">
 
               <div>
                 <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
                   {{errorMessage}}
                 </p>
               </div>
+
+              <div *ngIf="users.length > 0">
+                <ol>
+                  <li *ngFor="let user of users">
+                    Name: {{ user.Name }} <br>
+                    Password:{{user.Password}}  <br>
+                    Email:{{user.Email}}  <br>
+                    PhoneNumber:{{user.PhoneNumber}} <br> 
+                    Address:{{user.Address}}
+                 
+                  </li>
+                </ol>
+              </div>
+              <div *ngIf="users.length === 0">
+                no user found
+              </div>
+              <!-- <button (click)="getUsersById(f)">Refresh</button><br><br /> -->
 
               <button type="submit" class="btn btn-primary px-4">Login</button>
 
