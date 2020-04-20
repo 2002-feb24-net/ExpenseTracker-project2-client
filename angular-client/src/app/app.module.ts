@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { BillsComponent } from './bills/bills.component';
 import { UsersComponent } from './users/users.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BillsComponent,
     UsersComponent,
-    NavbarComponent
+    NavbarComponent,
+    SubscriptionsComponent
   ],
   imports: [
     BrowserModule,

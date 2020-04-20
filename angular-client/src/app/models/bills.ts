@@ -6,5 +6,5 @@ export default interface Bills {
     cost: number;
     billDate: Date;
     location: string;
-    //user?: any;
+    user?: any;
 }

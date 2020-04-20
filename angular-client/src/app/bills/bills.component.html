@@ -19,13 +19,13 @@
 <form [formGroup]="createBillsForm" (ngSubmit)="createBills()">
     <label>
       UserID:
-      <input type="text" formControlName="UserID" required> <br>
+      <input type="number" formControlName="userId" required> <br>
       Purchase Name:
       <input type="text" formControlName="purchaseName" required> <br>
       Quantity:
-      <input type="text" formControlName="quantity" required> <br>
+      <input type="number" formControlName="quantity" required> <br>
       Cost:
-      <input type="text" formControlName="cost" required> <br>
+      <input type="number" formControlName="cost" required> <br>
       Date:
       <input type="datetime-local" formControlName="billDate" required> <br>
       Location:
