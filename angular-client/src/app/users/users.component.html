@@ -4,34 +4,50 @@
         <div class="col-md-6 mx-auto">
             <div class="card mx-4">
                 <div class="card-body p-4">
+                    
                     <form [formGroup]="CreateUserForm" (ngSubmit)="CreateUser()">
                         <h1 style="text-align:center">Register</h1>
 
 
                         <div class="input-group mb-3"> Name:
                             <input type="text" class="form-control" placeholder="Insert Name" formControlName="Name"
-                                required>
+                                required [ngClass]="{ 'is-invalid': submitted && f.Name.errors}">
+                                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Name.errors.required">Name is required</div>
+                                </div>
                         </div>
                         <div class="input-group mb-3"> Password:
                             <input type="password" class="form-control" placeholder="Insert 6 char Password"
-                                formControlName="Password" required>
+                                formControlName="Password"  [ngClass]="{ 'is-invalid': submitted && f.Password.errors}">
+                                <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Password.errors.required">Password is required</div>
+                                </div>
                         </div>
                         <div class="input-group mb-4"> Email:
                             <input type="text" class="form-control" placeholder="Insert valid Email"
-                                formControlName="Email" required>
+                                formControlName="Email" required [ngClass]="{ 'is-invalid': submitted && f.Email.errors}">
+                                <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Email.errors.required">Email is required</div>
+                                </div>
                         </div>
                         <div class="input-group mb-4"> Phone Number:
                             <input type="text" class="form-control" placeholder="Insert 10 digit Number"
-                                formControlName="ContactNo" required>
+                                formControlName="PhoneNumber" required [ngClass]="{ 'is-invalid': submitted && f.PhoneNumber.errors}">
+                                <div *ngIf="submitted && f.PhoneNumber.errors" class="invalid-feedback">
+                                    <div *ngIf="f.PhoneNumber.errors.required">Number is required</div>
+                                </div>
                         </div>
                         <div class="input-group mb-4"> Address:
                             <input type="text" class="form-control" placeholder="Insert Address"
-                                formControlName="Address" required>
+                                formControlName="Address" required [ngClass]="{ 'is-invalid': submitted && f.Address.errors}">
+                                <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Address.errors.required">Address is required</div>
+                                </div>
                         </div>
                         <div class="input-group mb-4"> Membership:
                             <input type="text" class="form-control" placeholder="Membership" formControlName="Address">
                         </div>
-                        <button type="submit" class="btn btn-block btn-success" [disabled]="!CreateUserForm.valid">Add
+                        <button type="submit" class="btn btn-block btn-success" >
                             User</button>
                     </form>
                     <div *ngIf="error" class="error">

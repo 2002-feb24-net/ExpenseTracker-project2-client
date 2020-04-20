@@ -3,7 +3,7 @@ export default interface Users {
     Name:string;  
     Password:string;  
     Email:string;  
-    ContactNo:string;  
+    PhoneNumber:string;  
     Address:string;
     Membership?:boolean;
 }

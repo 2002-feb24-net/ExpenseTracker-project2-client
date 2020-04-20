@@ -7,7 +7,7 @@ import Users from './models/users';
 })
 export class UserService {
  //private baseUrl = environment.notesApiBaseUrl;
- private baseUrl = 'https://localhost:5001/';
+ private baseUrl = 'https://localhost:44395/';
  constructor(private http: HttpClient) { }
  getUsers() {
    return this.http.get<Users[]>(`${this.baseUrl}api/Users`)

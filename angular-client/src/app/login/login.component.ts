@@ -17,8 +17,7 @@ export class LoginComponent  {
     sessionStorage.removeItem('Name');    
     sessionStorage.clear();    
   }    
-  login(){    
-    debugger;    
+  login(){      
     this.LoginService.Login(this.model).subscribe(    
       data => {    
         debugger;    

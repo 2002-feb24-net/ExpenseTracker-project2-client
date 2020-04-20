@@ -10,18 +10,26 @@ import { UserService } from '../user.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-
+  submitted = false;
   users: Users[] = [];
   error: string | undefined;
 
   CreateUserForm = this.formBuilder.group({
     text: ['', Validators.required]
   });
+  router: any;
 
   constructor(private formBuilder: FormBuilder, private userApi: UserService) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    this.CreateUserForm = this.formBuilder.group({
+      Name: ['', Validators.required],
+      Password: ['', [Validators.required, Validators.minLength(6)]],
+      Email: ['', Validators.required],
+      Address: ['', Validators.required],
+      PhoneNumber: ['', Validators.required],
+     
+  });
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -33,6 +41,7 @@ export class UsersComponent implements OnInit {
   resetError() {
     this.error = undefined; //clears error message
   }
+  get f() { return this.CreateUserForm.controls; }
 
   getUsers() {
     return this.userApi.getUsers()
@@ -47,11 +56,12 @@ export class UsersComponent implements OnInit {
       );
   }
   CreateUser() {
+    this.submitted = true;
     const newUsers: Users = {
       Name: this.CreateUserForm.get('Name')?.value,
       Password: this.CreateUserForm.get('Password')?.value,
       Email: this.CreateUserForm.get('Email')?.value,
-      ContactNo: this.CreateUserForm.get('Contact No')?.value,
+      PhoneNumber: this.CreateUserForm.get('PhoneNumber')?.value,
       Address: this.CreateUserForm.get('Address')?.value,
       Membership: this.CreateUserForm.get('Membership')?.value
     };
@@ -60,6 +70,7 @@ export class UsersComponent implements OnInit {
         user => {
           if (this.error) {
             this.getUsers();
+            this.router.navigate(['/login']);
           } else {
             this.users.unshift(user); //inserts new element at start of array
             this.resetError(); //clears error message

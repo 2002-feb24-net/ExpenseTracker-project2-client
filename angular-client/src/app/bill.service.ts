@@ -9,7 +9,7 @@ import Bills from './models/bills';
 })
 export class BillService {
   //private baseUrl = environment.notesApiBaseUrl;
-  private baseUrl = 'https://localhost:5001/';
+  private baseUrl = 'https://localhost:44395/';
   constructor(private http: HttpClient) { }
   getBills() {
     return this.http.get<Bills[]>(`${this.baseUrl}api/Bills`)
