@@ -13,6 +13,11 @@ export class UserService {
    return this.http.get<Users[]>(`${this.baseUrl}api/Users`)
      .toPromise();
  }
+ getUsersById(user : Users)
+ {
+  return this.http.get<Users[]>(`${this.baseUrl}api/Users/` + user.id)
+  .toPromise();
+ }
  CreateUser(user: Users){
    return this.http.post<Users>(`${this.baseUrl}api/Users`, user)
      .toPromise();

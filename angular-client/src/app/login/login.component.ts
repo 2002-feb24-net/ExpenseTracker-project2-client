@@ -29,18 +29,18 @@ export class LoginComponent  {
   } 
 
 
-  // getUsersById(f : NgForm){
-  //   return this.LoginService.getUsersById(f.value)
-  //     .then(
-  //       users => {
-  //         this.users = users; //uses promises to accept the api response
-  //       console.log(f.value)
-  //       },
-  //       error => {
-  //         this.handleError(error); //handles error
-  //       }
-  //     );
-  // }
+  getUsersById(f : NgForm){
+    return this.LoginService.getUsersById(f.value)
+      .then(
+        users => {
+          this.users = users; //uses promises to accept the api response
+        console.log(f.value)
+        },
+        error => {
+          this.handleError(error); //handles error
+        }
+      );
+  }
 
 
   Login(f: NgForm) {
