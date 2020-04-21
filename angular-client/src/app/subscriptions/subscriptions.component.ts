@@ -1,0 +1,83 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormBuilder, Validators } from '@angular/forms';
+import { SubscriptionService } from '../subscription.service';
+import Subscriptions from '../models/subscriptions';
+
+@Component({
+  selector: 'app-subscriptions',
+  templateUrl: './subscriptions.component.html',
+  styleUrls: ['./subscriptions.component.css']
+})
+export class SubscriptionsComponent implements OnInit {
+  subs: Subscriptions[] = [];
+  error: string | undefined;
+  submitted = false;
+  createSubsForm = this.formBuilder.group({
+    userId: ['', Validators.required],
+    company: ['', Validators.required],
+    subscriptionName: ['', Validators.required],
+    subscriptionMonthCost: ['', Validators.required],
+    subscriptionDate: ['', Validators.required],
+    subscriptionDueDate: ['', Validators.required],
+    notification: ['', Validators.required]
+  });
+
+  constructor(
+    private subApi: SubscriptionService,
+    private formBuilder: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    this.getSubs();
+  }
+
+  handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      this.error = `An error occurred: ${error.error.message}`; //in the event of a network error. Add error message.
+    } else {
+      this.error = `Backend returned code ${error.status}, body was: ${error.error}`; //If the response status code was an error then display said error
+    }
+  }
+  resetError() {
+    this.error = undefined; //clears error message
+  }
+  get f() { return this.createSubsForm.controls; }
+  getSubs() {
+    return this.subApi.getSubs()
+      .then(
+        subs => {
+          this.subs = subs; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
+      );
+  }
+  createSubs() {
+    this.submitted = true;
+    const newSubs: Subscriptions = {
+      userId: this.createSubsForm.get('userId')?.value,
+      company: this.createSubsForm.get('company')?.value,
+      subscriptionName: this.createSubsForm.get('subscriptionName')?.value,
+      subscriptionMonthCost: this.createSubsForm.get('subscriptionMonthCost')?.value,
+      subscriptionDate: this.createSubsForm.get('subscriptionDate')?.value,
+      subscriptionDueDate: this.createSubsForm.get('subscriptionDueDate')?.value,
+      notification: this.createSubsForm.get('notification')?.value,
+      user: null
+    };
+    this.subApi.createSubs(newSubs)
+      .then(
+        sub => {
+          if (this.error) {
+            this.getSubs();
+          } else {
+            this.subs.unshift(sub); //inserts new element at start of array
+            this.resetError(); //clears error message
+          }
+        },
+        error => this.handleError(error) //handles error message
+      );
+  }
+}

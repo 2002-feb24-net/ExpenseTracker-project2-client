@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { BillsComponent } from './bills/bills.component';
 import { UsersComponent } from './users/users.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -17,6 +18,8 @@ import { LoginComponent } from './login/login.component';
     BillsComponent,
     UsersComponent,
     NavbarComponent,
+    BillsAPIBranch,
+    SubscriptionsComponent,
     LoginComponent
   ],
   imports: [
