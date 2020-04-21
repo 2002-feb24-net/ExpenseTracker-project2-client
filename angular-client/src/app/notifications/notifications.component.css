@@ -3,25 +3,6 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: lighter;
   }
-  a{
-    border-top: 6px solid gainsboro;
-    border-right: 6px solid gainsboro;
-    border-left: 6px solid gray;
-    border-bottom: 6px solid gray;
-    background-color: lightgrey;
-    border-radius: 4px;
-    padding: 5px 10px;
-    color: black;
-    
-  }
-  nav{
-    border-bottom: 6px solid gray;
-    background-color: lightgrey;
-    border-radius: 4px;
-    padding: 25px 10px;
-    background: rgb(131,58,180);
-background: linear-gradient(344deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
-  }
   body {
     margin: 2em;
   }
