@@ -14,7 +14,12 @@ export class BillsComponent implements OnInit{
   error: string | undefined;
 
   createBillsForm = this.formBuilder.group({
-    text: ['', Validators.required]
+    userId: ['', Validators.required],
+    purchaseName: ['', Validators.required],
+    quantity: ['', Validators.required],
+    cost: ['', Validators.required],
+    billDate: ['', Validators.required],
+    location: ['', Validators.required],
   });
 
   constructor(
@@ -50,12 +55,13 @@ export class BillsComponent implements OnInit{
   }
   createBills() {
     const newBills: Bills = {
-      userId: this.createBillsForm.get('userid')?.value,
-      purchaseName: this.createBillsForm.get('purchasename')?.value,
+      userId: this.createBillsForm.get('userId')?.value,
+      purchaseName: this.createBillsForm.get('purchaseName')?.value,
       quantity: this.createBillsForm.get('quantity')?.value,
-      cost: this.createBillsForm.get('value')?.value,
+      cost: this.createBillsForm.get('cost')?.value,
       billDate: this.createBillsForm.get('date')?.value,
-      location: this.createBillsForm.get('location')?.value
+      location: this.createBillsForm.get('location')?.value,
+      user: null
     };
     this.billApi.createBills(newBills)
       .then(

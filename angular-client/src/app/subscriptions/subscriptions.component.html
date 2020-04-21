@@ -1,0 +1,44 @@
+<h1>Recent Subscriptions</h1>
+<div *ngIf="subs.length > 0">
+  <ol>
+    <li *ngFor="let sub of subs">
+        UserID: {{ sub.userId }} <br> 
+        Company: {{ sub.company }} <br> 
+        Purchase Name: {{ sub.subscriptionName }} <br> 
+        Monthly Cost: {{ sub.subscriptionMonthCost }} <br> 
+        Initial Subscription Date: {{ sub.subscriptionDate }} <br> 
+        Next Due Date: {{ sub.subscriptionDueDate }} <br> 
+        Notifications: {{ sub.notification }} <br> 
+    </li>
+  </ol>
+</div>
+<div *ngIf="subs.length === 0">
+    no subscriptions found
+  </div>
+  <button (click)="getSubs()">Refresh Subscriptions</button><br><br />
+  <h1>Add Subscriptions: </h1>
+  <form [formGroup]="createSubsForm" (ngSubmit)="createSubs()">
+      <label>
+        UserID:
+        <input type="number" formControlName="userId" required> <br>
+        Company Name:
+        <input type="text" formControlName="company" required> <br>
+        Purchase Name:
+        <input type="text" formControlName="subscriptionName" required> <br>
+        Monthly Cost:
+        <input type="number" formControlName="subscriptionMonthCost" required> <br>
+        Initial Date:
+        <input type="datetime-local" formControlName="subscriptionDate" required> <br>
+        Next Due Date:
+        <input type="datetime-local" formControlName="subscriptionDueDate" required> <br>
+        Notifications:
+        <input type="checkbox" formControlName="notification" required>
+      </label>
+        <br>
+      <button type="submit" [disabled]="!createSubsForm.valid">Submit</button>
+    </form>
+    
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+  
