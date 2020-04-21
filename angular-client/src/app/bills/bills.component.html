@@ -1,4 +1,7 @@
 <h1>Bill List</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 mx-auto">
 <div *ngIf="bills.length > 0">
   <ol>
     <li *ngFor="let bill of bills">
@@ -38,3 +41,7 @@
   <div *ngIf="error" class="error">
     {{ error }}
   </div>
+</div>
+</div>
+</div>
+
