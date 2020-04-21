@@ -9,7 +9,7 @@
             <form name="form" #f="ngForm"  (ngSubmit)="Login(f)"  >
               <h1 style="text-align:center">Login ID</h1>
 
-              <input type="text" name="id" ngModel required #first="ngModel"  class="form-control sty1" placeholder="ID" required>
+              <input type="text" name="id" ngModel   class="form-control sty1" placeholder="ID" required>
 
 
               <div>
@@ -21,11 +21,11 @@
               <div *ngIf="users.length > 0">
                 <ol>
                   <li *ngFor="let user of users">
-                    Name: {{ user.Name }} <br>
-                    Password:{{user.Password}}  <br>
-                    Email:{{user.Email}}  <br>
-                    PhoneNumber:{{user.PhoneNumber}} <br> 
-                    Address:{{user.Address}}
+                    Name: {{ user.name }} <br>
+                    Password: {{user.password}}  <br>
+                    Email: {{user.email}}  <br>
+                    PhoneNumber: {{user.phoneNumber}} <br> 
+                    Address: {{user.address}}
                  
                   </li>
                 </ol>

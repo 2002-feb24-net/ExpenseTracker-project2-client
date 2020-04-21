@@ -11,21 +11,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent  {
   users: Users[] = [];
-  model : any={};    
+   
   login : Users;
   error: string | undefined;
-  idw = this.model.id;
+
 
   errorMessage:string;    
   UserForm = this.formBuilder.group({
     text: ['', Validators.required]
   });
  
-  constructor(private formBuilder: FormBuilder,private router:Router,private LoginService:UserService) { }    
+  constructor(private formBuilder: FormBuilder,private LoginService:UserService) { }    
 
   ngOnInit() {    
-    sessionStorage.removeItem('Name');    
-    sessionStorage.clear();    
+   
     
   } 
 
@@ -51,8 +50,8 @@ export class LoginComponent  {
     
       .then(
         users => {
-      
-          this.users= users; //uses promises to accept the api response
+      console.log(users)
+          this.users = users; //uses promises to accept the api response
           this.resetError(); //resets error message
         }, 
         error => {
