@@ -8,7 +8,7 @@ import Subscription from './models/subscriptions';
 })
 export class SubscriptionService {
 
-  private baseUrl = 'https://localhost:5001/';
+  private baseUrl = 'https://localhost:44395/';
   constructor(private http: HttpClient) { }
   getSubs() {
     return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions`)
