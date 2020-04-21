@@ -18,7 +18,6 @@ import { LoginComponent } from './login/login.component';
     BillsComponent,
     UsersComponent,
     NavbarComponent,
-    BillsAPIBranch,
     SubscriptionsComponent,
     LoginComponent
   ],
