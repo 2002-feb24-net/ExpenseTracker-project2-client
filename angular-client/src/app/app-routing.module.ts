@@ -4,7 +4,7 @@ import { UsersComponent } from './users/users.component';
 import { BillsComponent } from './bills/bills.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { LoginComponent } from './login/login.component';
-
+import { MembershipComponent } from './membership/membership.component';
 import { UserpageComponent } from './userpage/userpage.component';
 
 import { NotificationsComponent } from './notifications/notifications.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'Subs', component: SubscriptionsComponent },
 
   { path: 'Page', component: UserpageComponent },
-
+  { path: 'Membership', component: MembershipComponent },
 
   { path: 'Login', component: LoginComponent },
   { path: 'Notifications', component: NotificationsComponent }

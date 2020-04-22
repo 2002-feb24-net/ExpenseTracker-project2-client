@@ -1,0 +1,20 @@
+<div class="container" style="padding-top:60px;">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+                <div *ngIf="this.user != undefined">
+                    <div *ngIf="this.user.membership == false">
+                        Purchase Premium Membership:  <button (click)="Purchase()"> BUY </button>
+                    </div>
+                    <div *ngIf="this.user.membership == true">
+                        Membership Purchased
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

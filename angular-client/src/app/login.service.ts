@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Users from './models/users';
 import { environment } from 'src/environments/environment';
+import { userInfo } from 'os';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,13 @@ export class LoginService {
    return this.http.get<Users[]>(this.Url + user.id)
    .toPromise();
   }
+  getUsersUpdateById(id : number)
+  {
+   return this.http.get<Users[]>(this.Url + id)
+   .toPromise();
+  }
+ UpdateUser(user: Users){
+  return this.http.put<Users>(`${this.Url}api/Users/${user.id}`, user)
+  .toPromise();
+ }
 }
