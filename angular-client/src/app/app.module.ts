@@ -34,14 +34,13 @@ import { BudgetsComponent } from './budgets/budgets.component';
     NavbarComponent,
     SubscriptionsComponent,
     LoginComponent,
+    BudgetsComponent,
 
     UserpageComponent,
     Page1Component,
     Page2Component,
 
-    NotificationsComponent,
-    BudgetsComponent,
-    BudgetsComponent
+    NotificationsComponent
 
   ],
   imports: [
