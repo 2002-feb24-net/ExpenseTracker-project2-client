@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Users from './models/users';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import Users from './models/users';
 export class UserService {
 
  //private baseUrl = environment.notesApiBaseUrl;
+
  header: any;
  formData:Users;
  list: Users;
@@ -17,6 +19,10 @@ export class UserService {
   const headerSettings: { [name: string]: string | string[]; } = {};
   this.header = new HttpHeaders(headerSettings);
   }
+
+ private baseUrl = environment.ApiBaseUrl;
+ constructor(private http: HttpClient) { }
+
  getUsers() {
    return this.http.get<Users[]>(`${this.baseUrl}api/Users`)
      .toPromise();
