@@ -107,7 +107,7 @@ stages:
             inputs:
               ConnectionType: 'AzureRM'
               azureSubscription: 'Azure subscription Pay as you go(750ddbda-b710-43de-9ec8-b03ede22e082)'
-              appType: 'webAppLinux'
+              appType: webApp
               WebAppName: 'revatureexpensetracker-client'
               packageForLinux: $(Pipeline.Workspace)/app
             displayName: azure app service deploy
