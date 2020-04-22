@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { UserpageComponent } from './userpage/userpage.component';
 
 import { NotificationsComponent } from './notifications/notifications.component';
+import { BudgetsComponent } from './budgets/budgets.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
 
 
   { path: 'Login', component: LoginComponent },
-  { path: 'Notifications', component: NotificationsComponent }
+  { path: 'Notifications', component: NotificationsComponent },
+  { path: 'Budgets', component: BudgetsComponent}
 
 ];
 
