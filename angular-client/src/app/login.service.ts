@@ -19,7 +19,7 @@ export class LoginService {
   }
   Login(model: any) {
     debugger;
-    return this.http.post<any>('https://localhost:44377/' + 'api/Users/', model, { headers: this.header });
+    return this.http.post<any>(this.Url + 'api/Users/', model, { headers: this.header });
   }
   getUsers() {
     return this.http.get<Users[]>(`${this.Url}api/Users/`)
@@ -31,7 +31,7 @@ export class LoginService {
   }
   getUsersById(user : Users)
   {
-   return this.http.get<Users[]>('https://localhost:44377/api/Users/' + user.id)
+   return this.http.get<Users[]>(this.Url + user.id)
    .toPromise();
   }
 }
