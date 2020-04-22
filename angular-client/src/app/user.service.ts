@@ -20,8 +20,6 @@ export class UserService {
   this.header = new HttpHeaders(headerSettings);
   }
 
- private baseUrl = environment.ApiBaseUrl;
- constructor(private http: HttpClient) { }
 
  getUsers() {
    return this.http.get<Users[]>(`${this.baseUrl}api/Users`)

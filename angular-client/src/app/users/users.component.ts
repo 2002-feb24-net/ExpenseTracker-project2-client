@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import Users from '../models/users';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -17,9 +18,8 @@ export class UsersComponent implements OnInit {
   CreateUserForm = this.formBuilder.group({
     text: ['', Validators.required]
   });
-  router: any;
 
-  constructor(private formBuilder: FormBuilder, private userApi: UserService) { }
+  constructor(private formBuilder: FormBuilder, private userApi: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.CreateUserForm = this.formBuilder.group({
@@ -70,7 +70,7 @@ export class UsersComponent implements OnInit {
         user => {
           if (this.error) {
             this.getUsers();
-           
+            this.router.navigate(['/Login']);
           } else {
             this.users.unshift(user); //inserts new element at start of array
             this.resetError(); //clears error message
@@ -78,7 +78,7 @@ export class UsersComponent implements OnInit {
         },
         error => this.handleError(error) //handles error message
       );
-      this.router.navigate(['/login']);
+     
   }
 
 
