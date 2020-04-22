@@ -6,6 +6,15 @@ import Users from './models/users';
   providedIn: 'root'
 })
 export class UserService {
+ postPaymentDetail() {
+   throw new Error("Method not implemented.");
+ }
+ refreshList() {
+   throw new Error("Method not implemented.");
+ }
+ putPaymentDetail() {
+   throw new Error("Method not implemented.");
+ }
  //private baseUrl = environment.notesApiBaseUrl;
  private baseUrl = 'https://localhost:44395/';
  constructor(private http: HttpClient) { }

@@ -22,13 +22,14 @@
                 <ol>
                   <li *ngFor="let user of users">
                     Name: {{ user.name }} <br>
-                    Password: {{user.password}}  <br>
-                    Email: {{user.email}}  <br>
-                    PhoneNumber: {{user.phoneNumber}} <br> 
-                    Address: {{user.address}}
+                    Password: {{ user.password }}  <br>
+                    Email: {{ user.email }}  <br>
+                    PhoneNumber: {{ user.phoneNumber }} <br> 
+                    Address: {{ user.address }}
                  
                   </li>
                 </ol>
+                
               </div>
               <div *ngIf="users.length === 0">
                 no user found

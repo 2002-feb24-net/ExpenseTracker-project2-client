@@ -33,6 +33,7 @@ export class LoginComponent  {
     return this.LoginService.getUsersById(f.value)
       .then(
         users => {
+        
           this.users = users; //uses promises to accept the api response
         console.log(f.value)
         },

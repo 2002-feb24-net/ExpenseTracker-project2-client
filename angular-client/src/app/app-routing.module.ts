@@ -4,12 +4,13 @@ import { UsersComponent } from './users/users.component';
 import { BillsComponent } from './bills/bills.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { LoginComponent } from './login/login.component';
+import { UserpageComponent } from './userpage/userpage.component';
 
 const routes: Routes = [
   { path: '', component: UsersComponent },
   { path: 'Bills', component: BillsComponent },
   { path: 'Subs', component: SubscriptionsComponent },
-  { path: 'Login', component: LoginComponent }
+  { path: 'Page', component: UserpageComponent }
 ];
 
 @NgModule({

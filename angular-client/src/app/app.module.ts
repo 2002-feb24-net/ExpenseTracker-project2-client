@@ -11,6 +11,15 @@ import { UsersComponent } from './users/users.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { LoginComponent } from './login/login.component';
+import { UserpageComponent } from './userpage/userpage.component';
+import { Page1Component } from './userpage/page1/page1.component';
+import { Page2Component } from './userpage/page2/page2.component';
+import { UserService } from './user.service';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ToastrModule} from 'ngx-toastr';
+import { PageService } from './page.service';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +28,10 @@ import { LoginComponent } from './login/login.component';
     UsersComponent,
     NavbarComponent,
     SubscriptionsComponent,
-    LoginComponent
+    LoginComponent,
+    UserpageComponent,
+    Page1Component,
+    Page2Component
   ],
   imports: [
     BrowserModule,
@@ -27,9 +39,11 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
  
   ],
-  providers: [],
+  providers: [UserService, PageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
