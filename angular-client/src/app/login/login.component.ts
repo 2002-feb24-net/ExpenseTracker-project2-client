@@ -26,8 +26,7 @@ export class LoginComponent  {
     private toastr: ToastrService,public LoginService:UserService) { }    
 
   ngOnInit() {    
-    this.resetForm();
-    
+  
   } 
 
   populateForm(id) {
@@ -65,13 +64,16 @@ export class LoginComponent  {
  return  this.LoginService.getUsersById().then(
       user => {
         this.toastr.info('Get By Id successfully', 'Get user by id');
+    
         this.user = user;
         //console.log(users);
        console.log(this.users)
         console.log(f)
       },
-      err => {
-        console.log(err);
+      error => {
+        this.toastr.error('wrong Id or Phone number', 'Get user by id');
+        this.handleError(error);
+        console.log(error);
       }
     )
   }
@@ -97,11 +99,8 @@ export class LoginComponent  {
     }
   }
 
-  resetError() {
-    this.error = undefined; //clears error message
-  }
-                                                  //login method to be implemented
-   
+
+                                               
   
       
 }

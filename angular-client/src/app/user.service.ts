@@ -27,7 +27,7 @@ export class UserService {
  }
  getUsersById()
  {
-  return this.http.get<Users>(`${this.baseUrl}api/Users/` + this.formData.id).toPromise();
+  return this.http.get<Users>(`${this.baseUrl}api/Users/${this.formData.id}/${this.formData.phoneNumber}`).toPromise();
 
  }
  CreateUser(user: Users){

@@ -4,31 +4,37 @@
       <div class="card-group">
         <div class="card p-4">
           <div class="card-body">
-            
-           
-            <form name="form" #f="ngForm"  (ngSubmit)="Login(f)"  >
+
+
+            <form name="form" #f="ngForm" (ngSubmit)="Login(f)">
               <h1 style="text-align:center">Login ID</h1>
 
-              <input type="text" name="id" ngModel [(ngModel)]="LoginService.formData.id"  class="form-control sty1" placeholder="ID" required>
+              <input type="text" name="id" ngModel [(ngModel)]="LoginService.formData.id" class="form-control sty1"
+                placeholder="ID" required>
+              <input type="text" name="phoneNumber" ngModel [(ngModel)]="LoginService.formData.phoneNumber"
+                class="form-control sty1" placeholder="Phone Number" required>
 
 
+
+
+              <br>
+
+              <button type="submit" class="btn btn-primary px-4">Login</button>
               <div>
                 <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
                   {{errorMessage}}
                 </p>
               </div>
+              <br>
 
-              <button type="submit" class="btn btn-primary px-4">Login</button>
-           <br>
-                
-                    name: {{ this.user.name }} <br>
-                    password: {{ this.user.password }}  <br>
-                    email: {{ this.user.email }}  <br>
-                    phoneNumber: {{ this.user.phoneNumber }} <br> 
-                    address: {{ this.user.address }}<br>
-                 
-                 
-               <!-- <button (click)="getUsersById(f)">Refresh</button><br><br /> -->
+              name: {{ this.user.name }} <br>
+              password: {{ this.user.password }} <br>
+              email: {{ this.user.email }} <br>
+              phoneNumber: {{ this.user.phoneNumber }} <br>
+              address: {{ this.user.address }}<br>
+
+
+              <!-- <button (click)="getUsersById(f)">Refresh</button><br><br /> -->
 
 
             </form>
