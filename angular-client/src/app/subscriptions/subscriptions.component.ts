@@ -13,8 +13,8 @@ export class SubscriptionsComponent implements OnInit {
   subs: Subscriptions[] = [];
   error: string | undefined;
   submitted = false;
+  UserID: number = 2; //CHANGE THIS LATER TO A COOKIE OR SOMETHING
   createSubsForm = this.formBuilder.group({
-    userId: ['', Validators.required],
     company: ['', Validators.required],
     subscriptionName: ['', Validators.required],
     subscriptionMonthCost: ['', Validators.required],
@@ -58,7 +58,7 @@ export class SubscriptionsComponent implements OnInit {
   createSubs() {
     this.submitted = true;
     const newSubs: Subscriptions = {
-      userId: this.createSubsForm.get('userId')?.value,
+      userId: this.UserID,
       company: this.createSubsForm.get('company')?.value,
       subscriptionName: this.createSubsForm.get('subscriptionName')?.value,
       subscriptionMonthCost: this.createSubsForm.get('subscriptionMonthCost')?.value,
