@@ -1,9 +1,9 @@
 export default interface Users {
     id?: number;
-    Name:string;  
-    Password:string;  
-    Email:string;  
-    PhoneNumber:string;  
-    Address:string;
-    Membership?:boolean;
+    name:string;  
+    password:string;  
+    email:string;  
+    phoneNumber:string;  
+    address:string;
+    membership?:boolean;
 }

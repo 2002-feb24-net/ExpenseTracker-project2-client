@@ -58,12 +58,12 @@ export class UsersComponent implements OnInit {
   CreateUser() {
     this.submitted = true;
     const newUsers: Users = {
-      Name: this.CreateUserForm.get('Name')?.value,
-      Password: this.CreateUserForm.get('Password')?.value,
-      Email: this.CreateUserForm.get('Email')?.value,
-      PhoneNumber: this.CreateUserForm.get('PhoneNumber')?.value,
-      Address: this.CreateUserForm.get('Address')?.value,
-      Membership: this.CreateUserForm.get('Membership')?.value
+      name: this.CreateUserForm.get('name')?.value,
+      password: this.CreateUserForm.get('password')?.value,
+      email: this.CreateUserForm.get('email')?.value,
+      phoneNumber: this.CreateUserForm.get('phoneNumber')?.value,
+      address: this.CreateUserForm.get('address')?.value,
+      membership: this.CreateUserForm.get('membership')?.value
     };
     this.userApi.CreateUser(newUsers)
       .then(

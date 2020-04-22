@@ -1,34 +1,38 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Users from './models/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
- postPaymentDetail() {
-   throw new Error("Method not implemented.");
- }
- refreshList() {
-   throw new Error("Method not implemented.");
- }
- putPaymentDetail() {
-   throw new Error("Method not implemented.");
- }
+
  //private baseUrl = environment.notesApiBaseUrl;
+ header: any;
+ formData:Users;
+ list: Users;
  private baseUrl = 'https://localhost:44395/';
- constructor(private http: HttpClient) { }
+ constructor(private http: HttpClient) {
+   
+  const headerSettings: { [name: string]: string | string[]; } = {};
+  this.header = new HttpHeaders(headerSettings);
+  }
  getUsers() {
    return this.http.get<Users[]>(`${this.baseUrl}api/Users`)
      .toPromise();
  }
- getUsersById(user : Users)
+ getUsersById()
  {
-  return this.http.get<Users[]>(`${this.baseUrl}api/Users/` + user.id)
-  .toPromise();
+  return this.http.get<Users>(`${this.baseUrl}api/Users/` + this.formData.id).toPromise();
+
  }
  CreateUser(user: Users){
    return this.http.post<Users>(`${this.baseUrl}api/Users`, user)
      .toPromise();
  }
+ refreshList(){
+  this.http.get<Users>(`${this.baseUrl}api/Users`)
+  .toPromise()
+  .then(res => this.list = res as Users);
+}
 }

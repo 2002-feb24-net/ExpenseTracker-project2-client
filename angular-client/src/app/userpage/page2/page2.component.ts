@@ -22,12 +22,12 @@ export class Page2Component implements OnInit {
       form.form.reset();
     this.service.formData = {
       id: 0,
-      Name: '',
-      PhoneNumber: '',
-      Email: '',
-      Address:'',
-      Password:'',
-      Membership: false,
+      name: '',
+      phoneNumber: '',
+      email: '',
+      address:'',
+      password:'',
+      membership: false,
     }
   }
 
