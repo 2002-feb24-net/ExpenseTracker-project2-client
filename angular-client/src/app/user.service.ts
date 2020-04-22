@@ -13,7 +13,6 @@ export class UserService {
  header: any;
  formData:Users;
  list: Users;
- private baseUrl = 'https://localhost:44395/';
  constructor(private http: HttpClient) {
    
   const headerSettings: { [name: string]: string | string[]; } = {};
@@ -21,7 +20,7 @@ export class UserService {
   }
 
  private baseUrl = environment.ApiBaseUrl;
- constructor(private http: HttpClient) { }
+
 
  getUsers() {
    return this.http.get<Users[]>(`${this.baseUrl}api/Users`)

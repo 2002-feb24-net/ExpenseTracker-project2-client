@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import Users from './models/users';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageService {
 formData:Users;
-private Url = 'https://localhost:44395/';
+private Url = environment.ApiBaseUrl;
 token: string;
 header: any;
 list: Users[];
