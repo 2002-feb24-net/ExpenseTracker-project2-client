@@ -9,9 +9,8 @@ stages:
 - stage: build
 
   variables:
-    sdkVersion: 3.1.x
-    solutionPath: angular-client
-    buildConfiguration: Release
+    nodeVersion: 13.x
+    appDir: angular-client
 
   jobs:
 
@@ -21,23 +20,18 @@ stages:
       vmImage: ubuntu-latest
 
     steps:
-
-    - task: UseDotNet@2
+    - task: NodeTool@0
       inputs:
-        packageType: sdk
-        version: $(sdkVersion)
-      displayName: dotnet $(sdkVersion)
+        versionSpec: $(nodeVersion)
+      displayName: node $(nodeVersion)
 
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: publish
-        publishWebProjects: true
-        arguments:
-          --configuration $(buildConfiguration)
-          --output $(Build.ArtifactStagingDirectory)/app
-        modifyOutputPath: false
-        zipAfterPublish: false
-      displayName: dotnet publish
+    - script: npm ci
+      workingDirectory: $(appDir)
+      displayName: npm install
+
+    - script: npx ng build --outputPath $(Build.ArtifactStagingDirectory)/app --prod
+      workingDirectory: $(appDir)
+      displayName: ng build
 
     - publish: $(Build.ArtifactStagingDirectory)/app
       artifact: app
@@ -49,65 +43,42 @@ stages:
       vmImage: ubuntu-latest
 
     steps:
-
-    - task: UseDotNet@2
+    - task: NodeTool@0
       inputs:
-        packageType: sdk
-        version: 2.1.x
-      displayName: dotnet 2.1.x
+        versionSpec: $(nodeVersion)
+      displayName: node $(nodeVersion)
 
+    - script: npm ci
+      workingDirectory: $(appDir)
+      displayName: npm install
     - task: SonarCloudPrepare@1
       inputs:
         SonarCloud: 'SonarCloudConnection'
         organization: '2002-feb24-net'
-        scannerMode: 'MSBuild'
+        scannerMode: CLI
+        configMode: manual
         projectKey: '2002-feb24-net_ExpenseTracker-project2-client'
         projectName: 'ExpenseTracker-project2-client'
+        cliSources: $(appDir)/src
         extraProperties: |
-          sonar.exclusions=**/lib/**
-          sonar.cs.opencover.reportsPaths=$(Common.TestResultsDirectory)/*/coverage.opencover.xml
+          sonar.coverage.exclusions=**/*.spec.ts
+          sonar.typescript.lcov.reportPaths=$(appDir)/coverage/$(appDir)/lcov.info
       displayName: sonarcloud analysis prepare
 
-    - task: UseDotNet@2
-      inputs:
-        packageType: sdk
-        version: $(sdkVersion)
-      displayName: dotnet $(sdkVersion)
-
-    - script: dotnet build
-        --configuration $(buildConfiguration)
-      workingDirectory: $(solutionPath)
-      displayName: dotnet build
-
-    - script: dotnet test
-        --configuration $(buildConfiguration)
-        --logger trx
-        --no-build
-        --results-directory $(Common.TestResultsDirectory)
-        --settings coverlet.runsettings
-      workingDirectory: $(solutionPath)
+    - script: npx ng test --browsers ChromeHeadless --no-watch --code-coverage
+      workingDirectory: $(appDir)
       continueOnError: true
-      displayName: dotnet test
+      displayName: ng test
+
+    - script: npm run lint
+      workingDirectory: $(appDir)
+      continueOnError: true
+      displayName: ng lint
 
     - task: SonarCloudAnalyze@1
       displayName: sonarcloud analysis run
 
-    - task: PublishTestResults@2
-      condition: succeededOrFailed()
-      inputs:
-        testRunner: VSTest
-        testResultsFiles: $(Common.TestResultsDirectory)/*.trx
-      displayName: test results build publish
-
-    - task: PublishCodeCoverageResults@1
-      condition: succeededOrFailed()
-      inputs:
-        codeCoverageTool: Cobertura
-        summaryFileLocation: $(Common.TestResultsDirectory)/*/coverage.cobertura.xml
-      displayName: code coverage build publish
-
     - task: SonarCloudPublish@1
-      condition: succeededOrFailed()
       displayName: sonarcloud results build publish
 
 - stage: deploy
@@ -139,4 +110,4 @@ stages:
               appType: 'webAppLinux'
               WebAppName: 'revatureexpensetracker-client'
               packageForLinux: $(Pipeline.Workspace)/app
-              RuntimeStack: 'NODE|12-lts'
+            displayName: azure app service deploy
