@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Users from './models/users';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LoginService {
   header: any;
   constructor(private http: HttpClient) {
 
-    this.Url = 'https://localhost:44377/';
+    this.Url = environment.ApiBaseUrl;
 
     const headerSettings: { [name: string]: string | string[]; } = {};
     this.header = new HttpHeaders(headerSettings);
@@ -30,7 +31,7 @@ export class LoginService {
   }
   getUsersById(user : Users)
   {
-   return this.http.get<Users[]>(`${this.Url}api/Users/` + user.id)
+   return this.http.get<Users[]>('https://localhost:44377/api/Users/' + user.id)
    .toPromise();
   }
 }
