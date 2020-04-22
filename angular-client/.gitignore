@@ -22,7 +22,7 @@ speed-measure-plugin*.json
 *.launch
 .settings/
 *.sublime-workspace
-*ngx-toastr/
+*ngx-toastr/*
 
 # IDE - VSCode
 .vscode/*
