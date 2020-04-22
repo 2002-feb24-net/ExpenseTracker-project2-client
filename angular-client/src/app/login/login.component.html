@@ -9,7 +9,7 @@
             <form name="form" #f="ngForm"  (ngSubmit)="Login(f)"  >
               <h1 style="text-align:center">Login ID</h1>
 
-              <input type="text" name="id" ngModel   class="form-control sty1" placeholder="ID" required>
+              <input type="text" name="id" ngModel [(ngModel)]="LoginService.formData.id"  class="form-control sty1" placeholder="ID" required>
 
 
               <div>
@@ -18,21 +18,15 @@
                 </p>
               </div>
 
-              <div *ngIf="users.length > 0">
-                <ol>
-                  <li *ngFor="let user of users">
-                    Name: {{ user.name }} <br>
-                    Password: {{user.password}}  <br>
-                    Email: {{user.email}}  <br>
-                    PhoneNumber: {{user.phoneNumber}} <br> 
-                    Address: {{user.address}}
+           
+                
+                    name: {{ this.user.name }} <br>
+                    password: {{ this.user.password }}  <br>
+                    email: {{ this.user.email }}  <br>
+                    phoneNumber: {{ this.user.phoneNumber }} <br> 
+                    address: {{ this.user.address }}<br>
                  
-                  </li>
-                </ol>
-              </div>
-              <div *ngIf="users.length === 0">
-                no user found
-              </div>
+                 
                <!-- <button (click)="getUsersById(f)">Refresh</button><br><br /> -->
 
               <button type="submit" class="btn btn-primary px-4">Login</button>

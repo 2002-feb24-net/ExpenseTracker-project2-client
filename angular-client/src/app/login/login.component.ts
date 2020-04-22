@@ -4,15 +4,16 @@ import { UserService } from '../user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent  {
-  users: Users[] = [];
+   users: Users[] = [];
    
-  login : Users;
+  user : Users;
   error: string | undefined;
 
 
@@ -21,45 +22,73 @@ export class LoginComponent  {
     text: ['', Validators.required]
   });
  
-  constructor(private formBuilder: FormBuilder,private LoginService:UserService) { }    
+  constructor(private formBuilder: FormBuilder,
+    private toastr: ToastrService,public LoginService:UserService) { }    
 
   ngOnInit() {    
-   
+    this.resetForm();
     
   } 
 
-
-  getUsersById(f : NgForm){
-    return this.LoginService.getUsersById(f.value)
-      .then(
-        users => {
-          this.users = users; //uses promises to accept the api response
-        console.log(f.value)
-        },
-        error => {
-          this.handleError(error); //handles error
-        }
-      );
+  populateForm(id) {
+    this.LoginService.formData = Object.assign({}, id);
   }
 
+  // getUsersById(){
+  //   return this.LoginService.getUsersById()
+  //     .then(
+  //       users => {
+        
+  //         this.users = users; //uses promises to accept the api response
+        
+  //       },
+  //       error => {
+  //         this.handleError(error); //handles error
+  //       }
+  //     );
+  // }
 
+  resetForm(form?: NgForm) {
+    if (form != null)
+      form.form.reset();
+    this.LoginService.formData = {
+      id: 0,
+      name: '',
+      phoneNumber: '',
+      email: '',
+      address:'',
+      password:'',
+      membership: false,
+    }
+  }
   Login(f: NgForm) {
- 
-
-    return this.LoginService.getUsersById(f.value)
-    
-      .then(
-        users => {
-      console.log(users)
-          this.users = users; //uses promises to accept the api response
-          this.resetError(); //resets error message
-        }, 
-        error => {
-          this.handleError(error); //handles error
-        } 
-      );
+ return  this.LoginService.getUsersById().then(
+      user => {
+        this.toastr.info('Get By Id successfully', 'Get user by id');
+        this.user = user;
+        //console.log(users);
+       console.log(this.users)
+        console.log(f)
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
+    // return this.LoginService.getUsersById(f.value)
+    
+    //   .then(
+    //     users => {
+    //   console.log(users)
+    //       this.users = users; //uses promises to accept the api response
+    //       this.resetError(); //resets error message
+    //     }, 
+    //     error => {
+    //       this.handleError(error); //handles error
+    //     } 
+    //   );
+  
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       this.error = `An error occurred: ${error.error.message}`; //in the event of a network error. Add error message.
