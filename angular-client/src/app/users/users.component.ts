@@ -23,11 +23,11 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.CreateUserForm = this.formBuilder.group({
-      Name: ['', Validators.required],
-      Password: ['', [Validators.required, Validators.minLength(6)]],
-      Email: ['', Validators.required],
-      Address: ['', Validators.required],
-      PhoneNumber: ['', Validators.required],
+      name: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', Validators.required],
+      address: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
      
   });
   }
@@ -70,7 +70,7 @@ export class UsersComponent implements OnInit {
         user => {
           if (this.error) {
             this.getUsers();
-            this.router.navigate(['/login']);
+           
           } else {
             this.users.unshift(user); //inserts new element at start of array
             this.resetError(); //clears error message
@@ -78,6 +78,7 @@ export class UsersComponent implements OnInit {
         },
         error => this.handleError(error) //handles error message
       );
+      this.router.navigate(['/login']);
   }
 
 
