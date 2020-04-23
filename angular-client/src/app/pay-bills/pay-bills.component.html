@@ -17,15 +17,23 @@
                     {{errorMessage}}
                   </p>
                 </div>
-  
-             
-                  
-                purchaseName: {{ this.bill.purchaseName }}  <br>
-                quantity: {{ this.bill.quantity }}  <br>
-                cost: {{ this.bill.cost }} <br> 
-                billDate: {{ this.bill.billDate }}<br>
-                location {{this.bill.location}} <br>
-                   
+                <div *ngIf="bills.length > 0">
+                  <ol>
+                    <li *ngFor="let bill of bills">
+
+                      purchaseName: {{ this.bill.purchaseName }}  <br>
+                      quantity: {{ this.bill.quantity }}  <br>
+                      cost: {{ this.bill.cost }} <br> 
+                      billDate: {{ this.bill.billDate }}<br>
+                      location {{this.bill.location}} <br>
+
+                    </li>
+                  </ol>
+                </div>
+
+                <div *ngIf="bills.length === 0">
+                  no bills found
+                </div>
                    
                  <!-- <button (click)="getUsersById(f)">Refresh</button><br><br /> -->
   
