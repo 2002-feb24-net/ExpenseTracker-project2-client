@@ -1,27 +1,31 @@
 <div class="container" style="padding-top:60px;">
   <div class="row">
-    <div class="col-md-6 mx-auto">
-      <div class="card-group">
-        <div class="card p-4">
-          <div class="card-body">
+   
+          <div class="card-body p-4">
 
 
-            <form name="form" #f="ngForm" (ngSubmit)="Login(f)">
+            <form name="form" [formGroup]="CreateUserForm"  (ngSubmit)="Login()">
               <h1 style="text-align:center">Login ID</h1>
 
-              <input type="text" name="id" ngModel [(ngModel)]="LoginService.formData.id" class="form-control sty1"
-                placeholder="ID" required>
-              <input type="text" name="phoneNumber" ngModel [(ngModel)]="LoginService.formData.phoneNumber"
-                class="form-control sty1" placeholder="Phone Number" required>
+             Id:  <input type="text" name="id" ngModel [(ngModel)]="LoginService.formData.id" class="form-control sty1"
+             formControlName="id"  placeholder="ID" required [ngClass]="{ 'is-invalid': submitted && f.id.errors}">
+                <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
+                    <div *ngIf="f.id.errors.required">Id is required</div>
+                </div>
+             Phone: <input type="text" name="phoneNumber" ngModel [(ngModel)]="LoginService.formData.phoneNumber"
+             formControlName="phoneNumber" class="form-control sty1" placeholder="Phone Number" required  [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors}">
+                <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                    <div *ngIf="f.phoneNumber.errors.required">phone Number is required</div>
+                </div>
 
 
 
 
               <br>
 
-              <button type="submit" class="btn btn-primary px-4">Login</button>
+              <button type="submit" class="btn  btn-primary">Login</button>
               <div>
-                  <div *ngIf="error">  {{errorMessage}} </div> 
+                  <div *ngIf="error">  {{error}} </div> 
                 
               </div>
               <br>
@@ -37,9 +41,7 @@
 
 
             </form>
-          </div>
-        </div>
-      </div>
+        
     </div>
   </div>
 </div>

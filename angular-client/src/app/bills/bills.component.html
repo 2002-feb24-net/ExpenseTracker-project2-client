@@ -1,18 +1,20 @@
+<div class="card-body p-4 text" align="center">
 <h1>Recent Bills</h1>
 <div >
   <div >
     <div >
 <div *ngIf="bills.length > 0">
-  <ol>
-    <li *ngFor="let bill of bills">
-        UserID: {{ bill.userId }} <br> 
-        Item: {{ bill.purchaseName }} <br> 
-        Quantity: {{ bill.quantity }} <br>
-        Cost: ${{ bill.cost }} <br>
-        BillDate: {{ bill.billDate }} <br>
-        Location: {{ bill.location }} <br>
-    </li>
-  </ol>
+  <table class="table table-hover table-dark"><thead><th>Uid</th><th>Item</th><th>Purchase name</th>
+    <th>Quantity</th><th>cost</th><th>bill date</th><th>Location</th></thead>
+    <tr  *ngFor="let bill of bills">
+      <td > {{ bill.userId }} </td>  
+        <td > {{ bill.purchaseName }} </td>  
+          <td > {{ bill.quantity }} </td> 
+            <td > ${{ bill.cost }} </td> 
+              <td > {{ bill.billDate }} </td> 
+       <td> {{ bill.location }} </td> 
+      </tr>
+    </table>
 </div>
 <div *ngIf="bills.length === 0">
   no bills found
@@ -20,25 +22,38 @@
 <button (click)="getBillsById()">Refresh Bills</button><br><br />
   <h1>Create New Bill: </h1>
 <form [formGroup]="createBillsForm" (ngSubmit)="createBills()">
+
     <label>
+    
+    <div class="input-group mb-4">
       Purchase Name:
       <input type="text" formControlName="purchaseName" required> <br>
+    </div>
+    <div class="input-group mb-4">
       Quantity:
       <input type="number" formControlName="quantity" required> <br>
-      Cost:
+    </div>
+    <div class="input-group mb-4">
+      Cost :
       <input type="number" formControlName="cost" required> <br>
-      Date:
+    </div>
+    <div class="input-group mb-4">
+       Date:
       <input type="datetime-local" formControlName="billDate" required> <br>
-      Location:
+    </div>
+    <div class="input-group mb-4">
+       Location:
       <input type="text" formControlName="location" required>
+    </div>
     </label>
-  
-    <button type="submit" [disabled]="!createBillsForm.valid">Submit</button>
+  <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!createBillsForm.valid">Submit</button>
   </form>
   
   <div *ngIf="error" class="error">
     {{ error }}
   </div>
+</div>
 </div>
 </div>
 </div>

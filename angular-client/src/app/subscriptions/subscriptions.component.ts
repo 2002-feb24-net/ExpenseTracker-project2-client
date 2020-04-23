@@ -96,4 +96,17 @@ export class SubscriptionsComponent implements OnInit {
   //       } 
   //     );
   // }
+  // onDeleteS(id) {
+  //   if (confirm('Are you sure to delete this record ?')) {
+  //     this.subApi.deleteS(id)
+  //       .subscribe(res => {
+  //         debugger;
+  //         this.toastr.warning('Deleted successfully', 'Payment Detail Register');
+  //       },
+  //         err => {
+  //           debugger;
+  //           console.log(err);
+  //         })
+  //   }
+  //   }
 }

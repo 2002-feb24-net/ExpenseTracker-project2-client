@@ -13,7 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent  {
    users: Users[] = [];
-   
+   submitted = false;
   user : Users;
   error: string | undefined;
 
@@ -24,15 +24,26 @@ export class LoginComponent  {
   });
  
  
+  CreateUserForm = this.formBuilder.group({
+    text: ['', Validators.required]
+  });
+
   constructor(private formBuilder: FormBuilder,
     private toastr: ToastrService,private router: Router,public LoginService:LoginService,private CookieService: CookieService) { }    
 
   ngOnInit() {    
   this.resetForm();
   this.CookieService.deleteAll();
+  this.CreateUserForm = this.formBuilder.group({
+    id: ['', Validators.required],
+    
+    phoneNumber: ['', Validators.required],
+   
+});
   } 
 
-  
+  get f() { return this.CreateUserForm.controls; }
+
 
  
   // getUsersById(){
@@ -62,7 +73,9 @@ export class LoginComponent  {
       membership: false,
     }
   }
-  Login(f: NgForm) {
+  Login() {
+    
+    this.submitted = true;
  return  this.LoginService.getUsersById().then(
       user => {
         this.toastr.info('Get By Id successfully', 'Get user by id');

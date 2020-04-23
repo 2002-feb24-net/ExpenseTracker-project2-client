@@ -1,16 +1,19 @@
-<h1>Recent Subscriptions</h1>
+<div class="card-body p-4 text" align="center">
+  <h1>Recent Subscriptions</h1>
 <div *ngIf="subs.length > 0">
-  <ol>
-    <li *ngFor="let sub of subs">
-        UserID: {{ sub.userId }} <br> 
-        Company: {{ sub.company }} <br> 
-        Purchase Name: {{ sub.subscriptionName }} <br> 
-        Monthly Cost: {{ sub.subscriptionMonthCost }} <br> 
-        Initial Subscription Date: {{ sub.subscriptionDate }} <br> 
-        Next Due Date: {{ sub.subscriptionDueDate }} <br> 
-        Notifications: {{ sub.notification }} <br> 
-    </li>
-  </ol>
+  <table class="table table-hover table-dark"><thead><th>Uid</th><th>company</th><th>Sub. name</th>
+    <th>Sub. cost</th><th>Sub. date</th><th>due date</th><th>Notification</th></thead>
+    <tr  *ngFor="let sub of subs">
+      <td > {{ sub.userId }} </td> 
+        <td > {{ sub.company }} </td> 
+          <td >{{ sub.subscriptionName }} </td> 
+            <td > {{ sub.subscriptionMonthCost }} </td> 
+              <td > {{ sub.subscriptionDate }} </td> 
+                <td > {{ sub.subscriptionDueDate }} </td> 
+                  <td > {{ sub.notification }} </td> 
+               
+              </tr>
+            </table>
 </div>
 <div *ngIf="subs.length === 0">
     no subscriptions found
@@ -19,18 +22,21 @@
   <h1>Add Subscriptions: </h1>
   <form [formGroup]="createSubsForm" (ngSubmit)="createSubs()">
       <label>
-        Company Name:
-        <input type="text" formControlName="company" required> <br>
-        Purchase Name:
-        <input type="text" formControlName="subscriptionName" required> <br>
-        Monthly Cost:
-        <input type="number" formControlName="subscriptionMonthCost" required> <br>
-        Initial Date:
-        <input type="datetime-local" formControlName="subscriptionDate" required> <br>
-        Next Due Date:
-        <input type="datetime-local" formControlName="subscriptionDueDate" required> <br>
-        Notifications:
-        <input type="checkbox" formControlName="notification">
+        <div class="input-group mb-3"> user id:
+          <input type="text" formControlName="userId" required> </div>
+        <div class="input-group mb-3"> Company Name:
+        <input type="text" formControlName="company" required> </div>
+        <div class="input-group mb-3"> Purchase Name:
+        <input type="text" formControlName="subscriptionName" required> </div>
+        <div class="input-group mb-3"> Monthly Cost:
+        <input type="number" formControlName="subscriptionMonthCost" required> </div>
+        <div class="input-group mb-3"> Initial Date:
+        <input type="datetime-local" formControlName="subscriptionDate" required> </div>
+        <div class="input-group mb-3"> Next Due Date:
+        <input type="datetime-local" formControlName="subscriptionDueDate" required> </div>
+        <div class="input-group mb-3"> Notifications:
+        <input type="checkbox"  formControlName="notification">
+        <label class="form-check-label" for="notification">Check me out</label></div>
       </label>
         <br>
       <button type="submit" [disabled]="!createSubsForm.valid">Submit</button>
@@ -39,4 +45,5 @@
     <div *ngIf="error" class="error">
       {{ error }}
     </div>
+  </div>
   

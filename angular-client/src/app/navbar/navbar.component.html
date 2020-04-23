@@ -1,13 +1,38 @@
-<nav>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/Page" >AdminPage</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
     
-    <a routerLink="/Page" style="margin-left:1em; float: left;">AdminPage</a>
-        <a routerLink="/Bills" style="margin-left:1em; float: left;"> Bills</a>
-        <a routerLink="/Subs" style="margin-left:1em; float: left;"> Subs</a>
-    
-     <a routerLink="/Membership" style="margin-left:1em; right: 0; float: right;">Membership</a>
-     <a routerLink="/Notifications" style=" margin-left:1em; right: 1em; float: right; ">Notifications</a>
-     <a routerLink="/" style="margin-left:1em; right: 0; float: right;">Register</a>
-     <a routerLink="/Login" style="margin-left:1em; right: 0; float: right;">Login</a>
-     <a routerLink="/" style="margin-left:1em; float: right;">Logout</a>
+    <ul class="navbar-nav flex-grow-1">
+       
+        <li class="nav-item">
+            <a routerLink="/Bills"> Bills</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/Subs"> Subs</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/Membership" >Membership</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/Notifications">Notifications</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/">Register</a>
+        </li>
+        <li class="nav-item">
+            <a routerLink="/Login" >Login</a>
+        </li>
+        <li class="nav-item ">
+            <a routerLink="/">Logout</a>
+        </li>
 
+    </ul>
+   
+</div>
+</div>
 </nav>
