@@ -26,6 +26,12 @@ export class BillService {
   }
 
   getBillById() {
-    return this.http.get<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id).toPromise();
+    return this.http.get<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id)
+    .toPromise();
+  }
+
+  deleteBill() {
+    return this.http.delete<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id)
+    .toPromise();
   }
 }
