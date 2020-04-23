@@ -20,7 +20,7 @@ export class NotificationsComponent implements OnInit {
   }
   getSubsByUserID()
   {
-    return this.subApi.getSubsByUserID(this.UserID)
+    return this.subApi.getSubsByID()
       .then(
         subs => {
           this.subs = subs; //uses promises to accept the api response

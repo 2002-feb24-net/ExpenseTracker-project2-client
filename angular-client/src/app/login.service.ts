@@ -50,16 +50,16 @@ this.CookieService.set("data", data)
     return this.http.post<Users>(`${this.Url}api/Users/`, user)
       .toPromise();
   }
-  getUsersById()
- {
-  return this.http.get<Users>(`${this.Url}api/Users/${this.formData.id}/${this.formData.phoneNumber}`).toPromise();
-
- }
  refreshList(){
   this.http.get<Users>(`${this.Url}api/Users`)
   .toPromise()
   .then(res => this.list = res as Users);
 }
+getUsersById()
+ {
+  return this.http.get<Users>(`${this.Url}api/Users/${this.formData.id}/${this.formData.phoneNumber}`).toPromise();
+
+ }
   getUsersUpdateById(id : number)
   {
    return this.http.get<Users[]>(this.Url + id)

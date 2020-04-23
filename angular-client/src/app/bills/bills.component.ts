@@ -15,7 +15,6 @@ export class BillsComponent implements OnInit{
   error: string | undefined;
   bill: Bills;
 
-  UserID: number = 2; //TEMP VAR
   createBillsForm = this.formBuilder.group({
     purchaseName: ['', Validators.required],
     quantity: ['', Validators.required],
@@ -31,7 +30,7 @@ export class BillsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.getBillsByUserID();
+    this.getBillsById();
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -58,21 +57,21 @@ export class BillsComponent implements OnInit{
         } 
       );
   }
-  getBillsByUserID() {
-    return this.billApi.getBillsByUserID(this.UserID)
-      .then(
-        bills => {
-          this.bills = bills; //uses promises to accept the api response
-          this.resetError(); //resets error message
-        }, 
-        error => {
-          this.handleError(error); //handles error
-        } 
-      );
-  }
+  // getBillsByUserID() {
+  //   return this.billApi.getBillsByUserID(this.UserID)
+  //     .then(
+  //       bills => {
+  //         this.bills = bills; //uses promises to accept the api response
+  //         this.resetError(); //resets error message
+  //       }, 
+  //       error => {
+  //         this.handleError(error); //handles error
+  //       } 
+  //     );
+  // }
   createBills() {
     const newBills: Bills = {
-      userId: this.UserID,
+      userId: this.createBillsForm.get('userId')?.value,
       purchaseName: this.createBillsForm.get('purchaseName')?.value,
       quantity: this.createBillsForm.get('quantity')?.value,
       cost: this.createBillsForm.get('cost')?.value,
