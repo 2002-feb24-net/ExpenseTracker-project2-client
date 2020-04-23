@@ -35,13 +35,4 @@ export class LoginService {
    return this.http.get<Users[]>(this.Url + user.id)
    .toPromise();
   }
-  getUsersUpdateById(id : number)
-  {
-   return this.http.get<Users[]>(this.Url + id)
-   .toPromise();
-  }
- UpdateUser(user: Users){
-  return this.http.put<Users>(`${this.Url}api/Users/${user.id}`, user)
-  .toPromise();
- }
 }
