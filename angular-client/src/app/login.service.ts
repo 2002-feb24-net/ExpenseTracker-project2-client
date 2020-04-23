@@ -4,7 +4,6 @@ import Users from './models/users';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,9 +32,6 @@ this.CookieService.set("data", data)
   getData(){
     
    alert(this.CookieService.get('data'))
-  
-  
-   
   }
 
   clearData(){
@@ -54,11 +50,6 @@ this.CookieService.set("data", data)
     return this.http.post<Users>(`${this.Url}api/Users/`, user)
       .toPromise();
   }
-//   getUsersByIdByPhoneNumber()
-//  {
-//   return this.http.get<Users>(`${this.Url}api/Users/${this.formData.id}/${this.formData.phoneNumber}`).toPromise();
-
-//  }
  refreshList(){
   this.http.get<Users>(`${this.Url}api/Users`)
   .toPromise()
