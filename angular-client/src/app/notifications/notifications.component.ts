@@ -16,10 +16,11 @@ export class NotificationsComponent implements OnInit {
   constructor(private subApi: SubscriptionService) { }
 
   ngOnInit(): void {
-    this.getSubs();
+    this.getSubsByUserID();
   }
-  getSubs() {
-    return this.subApi.getSubs()
+  getSubsByUserID()
+  {
+    return this.subApi.getSubsByUserID(this.UserID)
       .then(
         subs => {
           this.subs = subs; //uses promises to accept the api response

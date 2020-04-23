@@ -9,6 +9,7 @@
                         Purchase Premium Membership:  <button (click)="Purchase()"> BUY </button>
                     </div>
                     <div *ngIf="this.user.membership == true">
+                        <script src="https://checkout.stripe.com/checkout.js"></script>
                         Membership Purchased
                     </div>
                 </div>

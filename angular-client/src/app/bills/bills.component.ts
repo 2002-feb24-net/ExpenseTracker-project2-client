@@ -12,9 +12,8 @@ import Bills from '../models/bills';
 export class BillsComponent implements OnInit{
   bills: Bills[] = [];
   error: string | undefined;
-
+  UserID: number = 2; //TEMP VAR
   createBillsForm = this.formBuilder.group({
-    userId: ['', Validators.required],
     purchaseName: ['', Validators.required],
     quantity: ['', Validators.required],
     cost: ['', Validators.required],
@@ -28,7 +27,7 @@ export class BillsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.getBills();
+    this.getBillsByUserID();
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -53,13 +52,25 @@ export class BillsComponent implements OnInit{
         } 
       );
   }
+  getBillsByUserID() {
+    return this.billApi.getBillsByUserID(this.UserID)
+      .then(
+        bills => {
+          this.bills = bills; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
+      );
+  }
   createBills() {
     const newBills: Bills = {
-      userId: this.createBillsForm.get('userId')?.value,
+      userId: this.UserID,
       purchaseName: this.createBillsForm.get('purchaseName')?.value,
       quantity: this.createBillsForm.get('quantity')?.value,
       cost: this.createBillsForm.get('cost')?.value,
-      billDate: this.createBillsForm.get('date')?.value,
+      billDate: this.createBillsForm.get('billDate')?.value,
       location: this.createBillsForm.get('location')?.value,
       user: null
     };

@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { UserService } from '../user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
+
+
 @Component({
   selector: 'app-membership',
   templateUrl: './membership.component.html',
   styleUrls: ['./membership.component.css']
 })
+
 export class MembershipComponent implements OnInit {
   user: Users;
   UserID: number = 2; //TEMP CHANGE THIS
@@ -18,6 +21,10 @@ export class MembershipComponent implements OnInit {
 
   ngOnInit(): void {
     this.Login();
+  }
+  Checkout(e) {
+    const user = this.user;
+    e.preventDefault();
   }
   Login() {
     return  this.MemberService.getUsersUpdateById(this.UserID).then(
