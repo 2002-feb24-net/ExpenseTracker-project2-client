@@ -69,10 +69,11 @@ export class SubscriptionsComponent implements OnInit {
     };
     this.subApi.createSubs(newSubs)
       .then(
-        subs => {
+        sub => {
           if (this.error) {
             this.getSubs();
           } else {
+            this.subs.unshift(sub); //inserts new element at start of array
             this.resetError(); //clears error message
           }
         },
