@@ -17,7 +17,7 @@
 <div *ngIf="bills.length === 0">
   no bills found
 </div>
-<button (click)="getBillsByUserID()">Refresh Bills</button><br><br />
+<button (click)="getBillsById()">Refresh Bills</button><br><br />
   <h1>Create New Bill: </h1>
 <form [formGroup]="createBillsForm" (ngSubmit)="createBills()">
     <label>

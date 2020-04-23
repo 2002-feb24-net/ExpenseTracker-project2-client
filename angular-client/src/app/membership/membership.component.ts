@@ -24,7 +24,7 @@ export class MembershipComponent implements OnInit {
     this.Login();
   }
   Login() {
-    return  this.MemberService.getUsersUpdateById(this.UserID).then(
+    return  this.MemberService.getUsersUpdateById().then(
          user => {
            this.toastr.info('Get By Id successfully', 'Get user by id');
            this.user = user;

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Users from './models/users';
 import { environment } from 'src/environments/environment';
 
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,8 @@ export class UserService {
  header: any;
  formData:Users;
  list: Users;
- constructor(private http: HttpClient) {
+ 
+ constructor(private http: HttpClient,private CookieService: CookieService) {
    
   const headerSettings: { [name: string]: string | string[]; } = {};
   this.header = new HttpHeaders(headerSettings);
@@ -34,13 +36,15 @@ export class UserService {
    return this.http.post<Users>(`${this.baseUrl}api/Users`, user)
      .toPromise();
  }
- getUsersUpdateById(id : number)
+ getUsersUpdateById()
  {
-  return this.http.get<Users>(`${this.baseUrl}api/Users/${id}`)
+ const  data=this.CookieService.get('data');
+  return this.http.get<Users>(`${this.baseUrl}api/Users/${data}`)
   .toPromise();
  }
 UpdateUser(user: Users){
- return this.http.put<Users>(`${this.baseUrl}api/Users/${user.id}`, user)
+  const  data=this.CookieService.get('data');
+ return this.http.put<Users>(`${this.baseUrl}api/Users/${data}`, user)
  .toPromise();
 }
  refreshList(){

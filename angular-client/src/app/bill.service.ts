@@ -36,8 +36,8 @@ export class BillService {
  
   }
 
-  getBillsByUserID(id: number){
-    return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${id}`)
-      .toPromise();
-  }
+  // getBillsByUserID(id: number){
+  //   return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${id}`)
+  //     .toPromise();
+  // }
 }
