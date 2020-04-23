@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/user.service';
 import { NgForm } from '@angular/forms';
 import { PageService } from 'src/app/page.service';
 

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import Bills from './models/bills';
+import Users from './models/users';
+import { LoginService } from './login.service';
+
 
 
 @Injectable({
@@ -10,7 +13,11 @@ import Bills from './models/bills';
 export class BillService {
   //private baseUrl = environment.notesApiBaseUrl;
   private baseUrl = environment.ApiBaseUrl;
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private LoginService : LoginService) { }
+  formData:Bills;
+  data = this.LoginService.getData();
+
   getBills() {
     return this.http.get<Bills[]>(`${this.baseUrl}api/Bills`)
       .toPromise();
@@ -18,5 +25,13 @@ export class BillService {
   createBills(bill: Bills) {
     return this.http.post<Bills>(`${this.baseUrl}api/Bills`, bill)
       .toPromise();
+      
   }
+  getBillsById()
+  {
+    console.log(`${this.data}`)
+   return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${this.data}`).toPromise();
+ 
+  }
+
 }

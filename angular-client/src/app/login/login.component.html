@@ -21,9 +21,8 @@
 
               <button type="submit" class="btn btn-primary px-4">Login</button>
               <div>
-                <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
-                  {{errorMessage}}
-                </p>
+                  <div *ngIf="error">  {{errorMessage}} </div> 
+                
               </div>
               <br>
 

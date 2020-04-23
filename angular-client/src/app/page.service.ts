@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class PageService {
 formData:Users;
-private Url = 'https://localhost:44395/';
+private Url = 'https://localhost:44377/';
 token: string;
 header: any;
 list: Users[];

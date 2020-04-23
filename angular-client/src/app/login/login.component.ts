@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -23,16 +23,13 @@ export class LoginComponent  {
   });
  
   constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,public LoginService:UserService) { }    
+    private toastr: ToastrService,public LoginService:LoginService) { }    
 
   ngOnInit() {    
-  
+  this.resetForm();
   } 
 
-  populateForm(id) {
-    this.LoginService.formData = Object.assign({}, id);
-  }
-
+ 
   // getUsersById(){
   //   return this.LoginService.getUsersById()
   //     .then(
@@ -66,8 +63,11 @@ export class LoginComponent  {
         this.toastr.info('Get By Id successfully', 'Get user by id');
     
         this.user = user;
-        //console.log(users);
+        this.LoginService.setData(this.user.id);
+      console.log("stuff");
        console.log(this.users)
+       console.log(this.user)
+       console.log(this.user.id)
         console.log(f)
       },
       error => {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import Users from '../models/users';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,7 +19,7 @@ export class UsersComponent implements OnInit {
     text: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private userApi: UserService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userApi: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     this.CreateUserForm = this.formBuilder.group({
