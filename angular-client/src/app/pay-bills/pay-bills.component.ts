@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PayBillsComponent implements OnInit {
   bills: Bills[] = [];
+  userPay: number;
+  
 
   bill:Bills;
   error: string | undefined;
@@ -46,20 +48,47 @@ export class PayBillsComponent implements OnInit {
     }
   }
 
-  GetbILLSforUser(f: NgForm) {
-    return  this.PayBillService.getBills().then(
-         bills => {
-           this.toastr.info('Get By Id successfully', 'Get bill by id');
-           this.bills = bills;
-           //console.log(users);
-          console.log(this.bills)
-           console.log(f)
-         },
-         err => {
-           console.log(err);
-         }
-       )
-     }
+  getBills() {
+    return this.PayBillService.getBills()
+      .then(
+        bills => {
+          this.bills = bills; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
+      );
+  }
+
+  onKey(event: any) {
+    return this.PayBillService.getBillById()
+    .then (
+      bill => {
+        this.bill = bill;
+        alert(this.bill.cost)
+        this.resetError();
+      },
+      error => {
+        this.handleError(error);
+      }
+    );
+  }
+
+  SubmitPay(f: NgForm) {
+    if(this.userPay == this.bill.cost) {
+     return this.PayBillService.deleteBill().then(
+       bill => {
+         this.toastr.info("Bill delete was successfully", "User paid correcly");
+         this.bill = bill;
+         console.log("Bill is no longer here");
+       }
+     )
+    }
+    else {
+      return alert("Please enter more");
+    }
+  }
 
      handleError(error: HttpErrorResponse) {
       if (error.error instanceof ErrorEvent) {
