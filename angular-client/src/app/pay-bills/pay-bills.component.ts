@@ -46,7 +46,7 @@ export class PayBillsComponent implements OnInit {
     }
   }
 
-  SubmitPay(f: NgForm) {
+  GetbILLSforUser(f: NgForm) {
     return  this.PayBillService.getBills().then(
          bills => {
            this.toastr.info('Get By Id successfully', 'Get bill by id');

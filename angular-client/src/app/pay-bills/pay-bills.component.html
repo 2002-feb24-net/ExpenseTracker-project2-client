@@ -6,10 +6,10 @@
             <div>
               
              
-              <form name="form" #f="ngForm"  (ngSubmit)="SubmitPay(f)"  >
-                <h1 style="text-align:center">Enter User ID</h1>
+              <form name="UserSelects" #f="ngForm"  (ngSubmit)="GetbILLSforUser(f)"  >
+                <h1 style="text-align:center">Enter Bill ID</h1>
   
-                <input type="text" name="id" ngModel [(ngModel)]="PayBillService.formData.id"  class="form-control sty1" style="width: 70%; float: left;" placeholder="ID" required>
+                <input type="text" name="id" ngModel [(ngModel)]="PayBillService.formData.id"  class="form-control sty1" style="width: 70%; float: left;" placeholder="User Id" required>
                 <button type="submit" class="btn btn-primary px-4" style="float:right">Enter</button>
                 <br>
                 <div>
@@ -31,7 +31,8 @@
                   </div>
                     </li>
                   </ul>
-                  <app-select-bill style="float: none;"></app-select-bill>
+                  <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+                  <app-select-bill></app-select-bill>
                 </div>
 
                 <div *ngIf="bills.length === 0">
