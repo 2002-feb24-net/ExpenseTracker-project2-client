@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import Bills from './models/bills';
 import Users from './models/users';
 import { LoginService } from './login.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -14,10 +15,10 @@ export class BillService {
   //private baseUrl = environment.notesApiBaseUrl;
   private baseUrl = environment.ApiBaseUrl;
 
-  constructor(private http: HttpClient, private LoginService : LoginService) { }
+  constructor(private http: HttpClient,private CookieService: CookieService, private LoginService : LoginService) { }
   formData:Bills;
-  data = this.LoginService.getData();
-
+  
+  
   getBills() {
     return this.http.get<Bills[]>(`${this.baseUrl}api/Bills`)
       .toPromise();
@@ -29,8 +30,9 @@ export class BillService {
   }
   getBillsById()
   {
-    console.log(`${this.data}`)
-   return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${this.data}`).toPromise();
+    console.log(this.CookieService.get('data'))
+    const data=this.CookieService.get('data');
+   return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${data}`).toPromise();
  
   }
 

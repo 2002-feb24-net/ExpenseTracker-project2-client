@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Users from './models/users';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class LoginService {
   header: any;
   formData:Users;
   list: Users;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private CookieService: CookieService) {
 
     this.Url = environment.ApiBaseUrl;
 
@@ -22,21 +23,22 @@ export class LoginService {
   private data;
 
   setData(data){
-    this.data = data;
-    console.log(data);
-    return data;
+
+this.CookieService.set("data", data)
+    console.log(data)
+
   }
 
   getData(){
-    let temp = this.data;
-    this.clearData();
-    console.log(temp);
-    return temp;
+    
+   alert(this.CookieService.get('data'))
+  
+  
    
   }
 
   clearData(){
-    this.data = undefined;
+    this.CookieService.deleteAll();
   }
   
   Login(model: any) {

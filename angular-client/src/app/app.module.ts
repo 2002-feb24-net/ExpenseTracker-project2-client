@@ -20,9 +20,10 @@ import { LoginService } from './login.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import { PageService } from './page.service';
-
+import {CookieService} from 'ngx-cookie-service'
 
 import { NotificationsComponent } from './notifications/notifications.component';
+import { from } from 'rxjs';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     ToastrModule.forRoot()
  
   ],
-  providers: [LoginService, PageService],
+  providers: [LoginService, PageService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

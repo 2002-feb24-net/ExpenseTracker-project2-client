@@ -4,6 +4,8 @@ import Users from '../models/users';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-users',
@@ -19,9 +21,10 @@ export class UsersComponent implements OnInit {
     text: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private userApi: LoginService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private CookieService: CookieService, private userApi: LoginService, private router: Router) { }
 
   ngOnInit(): void {
+    this.CookieService.deleteAll();
     this.CreateUserForm = this.formBuilder.group({
       name: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],

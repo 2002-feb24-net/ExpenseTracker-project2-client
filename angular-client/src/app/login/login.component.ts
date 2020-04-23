@@ -5,6 +5,7 @@ import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,12 +23,16 @@ export class LoginComponent  {
     text: ['', Validators.required]
   });
  
+ 
   constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,public LoginService:LoginService) { }    
+    private toastr: ToastrService,public LoginService:LoginService,private  CookieService: CookieService) { }    
 
   ngOnInit() {    
   this.resetForm();
+  this.CookieService.deleteAll();
   } 
+
+  
 
  
   // getUsersById(){
@@ -64,11 +69,10 @@ export class LoginComponent  {
     
         this.user = user;
         this.LoginService.setData(this.user.id);
-      console.log("stuff");
-       console.log(this.users)
-       console.log(this.user)
-       console.log(this.user.id)
-        console.log(f)
+       
+
+  
+   
       },
       error => {
         this.toastr.error('wrong Id or Phone number', 'Get user by id');
