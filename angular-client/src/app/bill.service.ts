@@ -19,4 +19,8 @@ export class BillService {
     return this.http.post<Bills>(`${this.baseUrl}api/Bills`, bill)
       .toPromise();
   }
+  getBillsByUserID(id: number){
+    return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${id}`)
+      .toPromise();
+  }
 }

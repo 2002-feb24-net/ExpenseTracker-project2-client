@@ -23,6 +23,7 @@ import { PageService } from './page.service';
 
 
 import { NotificationsComponent } from './notifications/notifications.component';
+import { MembershipComponent } from './membership/membership.component';
 
 
 @NgModule({
@@ -38,7 +39,9 @@ import { NotificationsComponent } from './notifications/notifications.component'
     Page1Component,
     Page2Component,
 
-    NotificationsComponent
+    NotificationsComponent,
+
+    MembershipComponent
 
   ],
   imports: [

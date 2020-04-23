@@ -29,7 +29,7 @@ export class SubscriptionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getSubs();
+    this.getSubsByUserID();
   }
 
   handleError(error: HttpErrorResponse) {
@@ -78,6 +78,19 @@ export class SubscriptionsComponent implements OnInit {
           }
         },
         error => this.handleError(error) //handles error message
+      );
+  }
+  getSubsByUserID()
+  {
+    return this.subApi.getSubsByUserID(this.UserID)
+      .then(
+        subs => {
+          this.subs = subs; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
       );
   }
 }
