@@ -7,7 +7,7 @@
               
              
               <form name="UserSelects" #f="ngForm" (ngSubmit)="SubmitPay(f)" >
-                <h1 style="text-align:center">Enter Bill ID</h1>
+                <h1 style="text-align:center">Enter User ID</h1>
   
                 <input type="text" name="UserId" ngModel [(ngModel)]="PayBillService.formData.id"  class="form-control sty1" style="width: 70%; float: left;" placeholder="User Id" required>
                 <button (click)="getBills()" type="button" class="btn btn-primary px-4" style="float:right" >Enter</button>
@@ -41,6 +41,7 @@
                   <input type="number" ngModel [(ngModel)]="PayBillService.formData.id" name="id" (keyup)="onKey($event)">
                 </div>
                 <div>
+                  <p>Enterr price</p>
                   <input type="number" id="id" ngModel [(ngModel)]="userPay">
                   <button type="submit" class="btn btn-primary px-4" style="float:right">Pay Bill</button>
                 </div>

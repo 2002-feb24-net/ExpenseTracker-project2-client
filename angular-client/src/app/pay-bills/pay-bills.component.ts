@@ -61,6 +61,7 @@ export class PayBillsComponent implements OnInit {
       );
   }
 
+  // Gets the Bill Id bassed on what the user Types
   onKey(event: any) {
     return this.PayBillService.getBillById()
     .then (
@@ -82,6 +83,7 @@ export class PayBillsComponent implements OnInit {
          this.toastr.info("Bill delete was successfully", "User paid correcly");
          this.bill = bill;
          console.log("Bill is no longer here");
+         console.log(f);
        }
      )
     }
