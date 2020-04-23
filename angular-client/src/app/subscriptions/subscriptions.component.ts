@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
 import Subscriptions from '../models/subscriptions';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-subscriptions',
@@ -11,6 +12,7 @@ import Subscriptions from '../models/subscriptions';
 })
 export class SubscriptionsComponent implements OnInit {
   subs: Subscriptions[] = [];
+  sub: Subscriptions;
   error: string | undefined;
   submitted = false;
   UserID: number = 2; //CHANGE THIS LATER TO A COOKIE OR SOMETHING
@@ -25,7 +27,8 @@ export class SubscriptionsComponent implements OnInit {
 
   constructor(
     private subApi: SubscriptionService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -71,10 +74,11 @@ export class SubscriptionsComponent implements OnInit {
       .then(
         sub => {
           if (this.error) {
-            this.getSubs();
-          } else {
-            this.subs.unshift(sub); //inserts new element at start of array
-            this.resetError(); //clears error message
+            this.toastr.info('Get By Id successful', 'Get subs by userid');
+    
+          this.sub = sub;
+          this.getSubs();
+       
           }
         },
         error => this.handleError(error) //handles error message

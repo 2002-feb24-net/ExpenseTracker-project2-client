@@ -25,7 +25,7 @@ export class LoginComponent  {
  
  
   constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,private router: Router,public LoginService:LoginService,private  CookieService: CookieService) { }    
+    private toastr: ToastrService,private router: Router,public LoginService:LoginService,private CookieService: CookieService) { }    
 
   ngOnInit() {    
   this.resetForm();

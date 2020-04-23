@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators, NgForm } from '@angular/forms';
 import { BillService } from '../bill.service';
 import Bills from '../models/bills';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bills',
@@ -12,6 +13,7 @@ import Bills from '../models/bills';
 export class BillsComponent implements OnInit{
   bills: Bills[] = [];
   error: string | undefined;
+  bill: Bills;
 
   createBillsForm = this.formBuilder.group({
     userId: ['', Validators.required],
@@ -24,7 +26,8 @@ export class BillsComponent implements OnInit{
 
   constructor(
     private billApi: BillService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -69,12 +72,11 @@ export class BillsComponent implements OnInit{
     this.billApi.createBills(newBills)
       .then(
         bill => {
-          if (this.error) {
-            this.getBillsById();
-          } else {
-            this.bills.unshift(bill); //inserts new element at start of array
-            this.resetError(); //clears error message
-          }
+          this.toastr.info('Get By Id successful', 'Get bills by userid');
+    
+          this.bill = bill;
+          this.getBillsById();
+          
         },
         error => this.handleError(error) //handles error message
       );
