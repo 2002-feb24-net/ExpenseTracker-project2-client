@@ -25,6 +25,7 @@ export class PayBillsComponent implements OnInit {
     private toastr: ToastrService,public PayBillService:BillService) { }
 
   ngOnInit(): void {
+    this.resetForm();
   }
 
   populateForm(id) {
