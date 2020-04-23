@@ -8,15 +8,15 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class SubscriptionService {
-
+  formData:Subscription;
+  data = this.LoginService.getData();
   private baseUrl = environment.ApiBaseUrl;
   constructor(private http: HttpClient, private LoginService : LoginService) { }
  
-  data = this.LoginService.getData();
   
   getSubs() {
-    return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions`)
-      .toPromise();
+    return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions/userid=${this.data}`).toPromise();
+      
   }
   createSubs(sub: Subscription){
     return this.http.post<Subscription>(`${this.baseUrl}api/Subscriptions`, sub)

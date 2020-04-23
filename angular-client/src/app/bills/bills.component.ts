@@ -11,7 +11,6 @@ import Bills from '../models/bills';
 })
 export class BillsComponent implements OnInit{
   bills: Bills[] = [];
-  bill: Bills;
   error: string | undefined;
 
   createBillsForm = this.formBuilder.group({
@@ -50,9 +49,7 @@ export class BillsComponent implements OnInit{
      
           this.bills = bills; //uses promises to accept the api response
           this.resetError(); //resets error message
-          console.log("t"+ this.bill);
-          console.log(bills)
-          console.log(this.bill.userId)
+         
         }, 
         error => {
           this.handleError(error); //handles error
@@ -82,17 +79,5 @@ export class BillsComponent implements OnInit{
         error => this.handleError(error) //handles error message
       );
   }
-  resetForm(form?: NgForm) {
-    if (form != null)
-      form.form.reset();
-    this.billApi.formData = {
-      id: 0,
-      userId: this.bill.userId,
-      purchaseName: '',
-      quantity: 0,
-      cost: 0,
-      billDate: null,
-      location: '',
-    }
+
   }
-}
