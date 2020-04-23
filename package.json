@@ -1,0 +1,26 @@
+{
+  "name": "expensetracker-project2",
+  "version": "1.0.0",
+  "description": "ExpensesTracker",
+  "main": "index.js",
+  "dependencies": {
+    "symbol-observable": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2002-feb24-net/ExpenseTracker-project2.git"
+  },
+  "keywords": [
+    "expenses"
+  ],
+  "author": "Tyler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2002-feb24-net/ExpenseTracker-project2/issues"
+  },
+  "homepage": "https://github.com/2002-feb24-net/ExpenseTracker-project2#readme"
+}
