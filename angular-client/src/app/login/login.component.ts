@@ -25,7 +25,7 @@ export class LoginComponent  {
  
  
   constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,public LoginService:LoginService,private  CookieService: CookieService) { }    
+    private toastr: ToastrService,private router: Router,public LoginService:LoginService,private  CookieService: CookieService) { }    
 
   ngOnInit() {    
   this.resetForm();
@@ -70,8 +70,13 @@ export class LoginComponent  {
         this.user = user;
         this.LoginService.setData(this.user.id);
        
-
-  
+if(this.user.id == 24 && this.user.phoneNumber == "1234567890")
+  {
+    this.router.navigate(['/Page']);
+  }
+  else{
+    this.router.navigate(['/Bills']);
+  }
    
       },
       error => {

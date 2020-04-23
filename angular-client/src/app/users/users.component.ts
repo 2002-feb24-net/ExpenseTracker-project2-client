@@ -21,7 +21,8 @@ export class UsersComponent implements OnInit {
     text: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private CookieService: CookieService, private userApi: LoginService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private CookieService: CookieService, private userApi: LoginService,
+     private router: Router) { }
 
   ngOnInit(): void {
     this.CookieService.deleteAll();
