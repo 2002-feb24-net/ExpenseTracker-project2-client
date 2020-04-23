@@ -1,1 +1,29 @@
-<p>budgets works!</p>
+<div class="container" style="padding-top:60px;">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+                <form name="form" #f="ngForm"  (ngSubmit)="SubmitPay(f)"  >
+                    <h1 style="text-align:center">Enter a User Id</h1>
+                    <input type="text" name="id" ngModel [(ngModel)]="payBillService.formData.id"  class="form-control sty1" placeholder="ID" required>
+                    <div>
+                        <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
+                          {{errorMessage}}
+                        </p>
+                      </div>
+
+                      Purchase name:  {{this.bill?.purchaseName}} <br> <br>
+                      Quantity: {{this.bill?.quantity}} <br> <br>
+                      Price: {{this.bill?.cost}} <br> <br>
+                      Location: {{this.bill?.location}} <br> <br>
+
+                      <button type="submit" class="btn btn-primary px-4">Login</button>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
