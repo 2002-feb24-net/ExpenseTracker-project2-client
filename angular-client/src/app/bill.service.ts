@@ -17,7 +17,7 @@ export class BillService {
   private baseUrl = environment.ApiBaseUrl;
   constructor(private http: HttpClient) { }
   getBills() {
-    return this.http.get<Bills[]>(`${this.baseUrl}api/Bills`)
+    return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/?` + this.formData.userId)
       .toPromise();
   }
   createBills(bill: Bills) {
