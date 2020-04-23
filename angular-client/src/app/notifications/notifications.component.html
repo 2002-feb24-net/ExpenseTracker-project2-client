@@ -2,7 +2,7 @@
 <div *ngIf="subs.length > 0">
   <ol>
     <a *ngFor="let sub of subs">
-        <li *ngIf="sub.userId == this.UserID">
+        <li>
         Company: {{ sub.company }} <br> 
         Purchase Name: {{ sub.subscriptionName }} <br> 
         Monthly Cost: {{ sub.subscriptionMonthCost }} <br> 

@@ -23,7 +23,7 @@ import { PageService } from './page.service';
 import {CookieService} from 'ngx-cookie-service'
 
 import { NotificationsComponent } from './notifications/notifications.component';
-import { from } from 'rxjs';
+import { MembershipComponent } from './membership/membership.component';
 
 
 @NgModule({
@@ -39,7 +39,9 @@ import { from } from 'rxjs';
     Page1Component,
     Page2Component,
 
-    NotificationsComponent
+    NotificationsComponent,
+
+    MembershipComponent
 
   ],
   imports: [
