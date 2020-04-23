@@ -23,8 +23,8 @@ export class SubscriptionService {
     return this.http.post<Subscription>(`${this.baseUrl}api/Subscriptions`, sub)
       .toPromise();
   }
-  // getSubsByUserID(id: number){
-  //   return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions/userid=${id}`)
-  //     .toPromise();
-  // }
+  getSubsByUserID(id: number){
+     return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions/userid=${id}`)
+       .toPromise();
+  }
 }
