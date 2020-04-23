@@ -34,4 +34,8 @@ export class BillService {
     return this.http.delete<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id)
     .toPromise();
   }
+
+  putBill() {
+    return this.http.put<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id, this.formData);
+  }
 }

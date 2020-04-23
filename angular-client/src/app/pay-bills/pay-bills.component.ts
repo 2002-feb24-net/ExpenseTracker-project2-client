@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BillService } from '../bill.service';
 import Bills from '../models/bills';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PayBillsComponent implements OnInit {
   bills: Bills[] = [];
   userPay: number;
+  header: any;
   
 
   bill:Bills;
@@ -24,7 +25,11 @@ export class PayBillsComponent implements OnInit {
   });
 
   constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,public PayBillService:BillService) { }
+    private toastr: ToastrService,public PayBillService:BillService) {
+
+      const headerSettings: { [name: string]: string | string[]; } = {};
+  this.header = new HttpHeaders(headerSettings);
+     }
 
   ngOnInit(): void {
     this.resetForm();
@@ -77,14 +82,16 @@ export class PayBillsComponent implements OnInit {
   }
 
   SubmitPay(f: NgForm) {
-    if(this.userPay == this.bill.cost) {
-     return this.PayBillService.deleteBill().then(
+    if(this.userPay === this.bill.cost) {
+     return this.PayBillService.putBill().subscribe(
        bill => {
-         this.toastr.info("Bill delete was successfully", "User paid correcly");
+        bill.purchaseName += " (Purchased)";
+         this.toastr.info("Pay was successfully", "User paid correcly");
          this.bill = bill;
+         
          console.log("Bill is no longer here");
          console.log(f);
-       }
+       },
      )
     }
     else {
