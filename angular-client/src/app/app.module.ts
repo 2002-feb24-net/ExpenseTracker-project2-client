@@ -23,7 +23,6 @@ import { PageService } from './page.service';
 
 
 import { NotificationsComponent } from './notifications/notifications.component';
-import { BudgetsComponent } from './budgets/budgets.component';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { BudgetsComponent } from './budgets/budgets.component';
     NavbarComponent,
     SubscriptionsComponent,
     LoginComponent,
-    BudgetsComponent,
 
     UserpageComponent,
     Page1Component,
