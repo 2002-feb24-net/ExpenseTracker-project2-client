@@ -9,35 +9,33 @@
               <form name="form" #f="ngForm"  (ngSubmit)="SubmitPay(f)"  >
                 <h1 style="text-align:center">Enter User ID</h1>
   
-                <input type="text" name="id" ngModel [(ngModel)]="PayBillService.formData.id"  class="form-control sty1" placeholder="ID" required>
-  
-  
+                <input type="text" name="id" ngModel [(ngModel)]="PayBillService.formData.id"  class="form-control sty1" style="width: 70%; float: left;" placeholder="ID" required>
+                <button type="submit" class="btn btn-primary px-4" style="float:right">Enter</button>
+                <br>
                 <div>
                   <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
                     {{errorMessage}}
                   </p>
                 </div>
                 <div *ngIf="bills.length > 0">
-                  <ol>
+                  <ul style="list-style-type: none;">
                     <li *ngFor="let bill of bills">
 
+                      Bill Id {{this.bill.id}} <br>
                       purchaseName: {{ this.bill.purchaseName }}  <br>
                       quantity: {{ this.bill.quantity }}  <br>
                       cost: {{ this.bill.cost }} <br> 
                       billDate: {{ this.bill.billDate }}<br>
                       location {{this.bill.location}} <br>
+                      <br>
 
                     </li>
-                  </ol>
+                  </ul>
                 </div>
 
                 <div *ngIf="bills.length === 0">
                   no bills found
                 </div>
-                   
-                 <!-- <button (click)="getUsersById(f)">Refresh</button><br><br /> -->
-  
-                <button type="submit" class="btn btn-primary px-4">Login</button>
   
               </form>
             </div>
