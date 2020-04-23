@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Users from './models/users';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-import { userInfo } from 'os';
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +32,6 @@ this.CookieService.set("data", data)
   getData(){
     
    alert(this.CookieService.get('data'))
-  
-  
-   
   }
 
   clearData(){
@@ -54,7 +50,7 @@ this.CookieService.set("data", data)
     return this.http.post<Users>(`${this.Url}api/Users/`, user)
       .toPromise();
   }
-  getUsersByIdByPhoneNumber()
+  getUsersById()
  {
   return this.http.get<Users>(`${this.Url}api/Users/${this.formData.id}/${this.formData.phoneNumber}`).toPromise();
 
@@ -64,11 +60,6 @@ this.CookieService.set("data", data)
   .toPromise()
   .then(res => this.list = res as Users);
 }
-  getUsersById(user : Users)
-  {
-   return this.http.get<Users[]>(this.Url + user.id)
-   .toPromise();
-  }
   getUsersUpdateById(id : number)
   {
    return this.http.get<Users[]>(this.Url + id)
