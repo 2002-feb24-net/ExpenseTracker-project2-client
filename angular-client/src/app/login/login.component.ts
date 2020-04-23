@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { LoginService } from '../login.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,18 +23,18 @@ export class LoginComponent  {
     text: ['', Validators.required]
   });
  
+ 
   constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,public LoginService:UserService) { }    
+    private toastr: ToastrService,private router: Router,public LoginService:LoginService,private CookieService: CookieService) { }    
 
   ngOnInit() {    
-    this.resetForm();
-    
+  this.resetForm();
+  this.CookieService.deleteAll();
   } 
 
-  populateForm(id) {
-    this.LoginService.formData = Object.assign({}, id);
-  }
+  
 
+ 
   // getUsersById(){
   //   return this.LoginService.getUsersById()
   //     .then(
@@ -65,13 +66,23 @@ export class LoginComponent  {
  return  this.LoginService.getUsersById().then(
       user => {
         this.toastr.info('Get By Id successfully', 'Get user by id');
+    
         this.user = user;
-        //console.log(users);
-       console.log(this.users)
-        console.log(f)
+        this.LoginService.setData(this.user.id);
+       
+if(this.user.id == 24 && this.user.phoneNumber == "1234567890")
+  {
+    this.router.navigate(['/Page']);
+  }
+  else{
+    this.router.navigate(['/Bills']);
+  }
+   
       },
-      err => {
-        console.log(err);
+      error => {
+        this.toastr.error('wrong Id or Phone number', 'Get user by id');
+        this.handleError(error);
+        console.log(error);
       }
     )
   }
@@ -97,11 +108,8 @@ export class LoginComponent  {
     }
   }
 
-  resetError() {
-    this.error = undefined; //clears error message
-  }
-                                                  //login method to be implemented
-   
+
+                                               
   
       
 }

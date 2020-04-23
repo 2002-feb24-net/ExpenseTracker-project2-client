@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, NgForm } from '@angular/forms';
 import { BillService } from '../bill.service';
 import Bills from '../models/bills';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bills',
@@ -12,7 +13,8 @@ import Bills from '../models/bills';
 export class BillsComponent implements OnInit{
   bills: Bills[] = [];
   error: string | undefined;
-  UserID: number = 2; //TEMP VAR
+  bill: Bills;
+
   createBillsForm = this.formBuilder.group({
     purchaseName: ['', Validators.required],
     quantity: ['', Validators.required],
@@ -23,11 +25,12 @@ export class BillsComponent implements OnInit{
 
   constructor(
     private billApi: BillService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.getBillsByUserID();
+    this.getBillsById();
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -40,33 +43,35 @@ export class BillsComponent implements OnInit{
     this.error = undefined; //clears error message
   }
 
-  getBills() {
-    return this.billApi.getBills()
+  getBillsById() {
+    return this.billApi.getBillsById()
       .then(
         bills => {
+     
           this.bills = bills; //uses promises to accept the api response
           this.resetError(); //resets error message
+         
         }, 
         error => {
           this.handleError(error); //handles error
         } 
       );
   }
-  getBillsByUserID() {
-    return this.billApi.getBillsByUserID(this.UserID)
-      .then(
-        bills => {
-          this.bills = bills; //uses promises to accept the api response
-          this.resetError(); //resets error message
-        }, 
-        error => {
-          this.handleError(error); //handles error
-        } 
-      );
-  }
+  // getBillsByUserID() {
+  //   return this.billApi.getBillsByUserID(this.UserID)
+  //     .then(
+  //       bills => {
+  //         this.bills = bills; //uses promises to accept the api response
+  //         this.resetError(); //resets error message
+  //       }, 
+  //       error => {
+  //         this.handleError(error); //handles error
+  //       } 
+  //     );
+  // }
   createBills() {
     const newBills: Bills = {
-      userId: this.UserID,
+      userId: this.createBillsForm.get('userId')?.value,
       purchaseName: this.createBillsForm.get('purchaseName')?.value,
       quantity: this.createBillsForm.get('quantity')?.value,
       cost: this.createBillsForm.get('cost')?.value,
@@ -77,16 +82,14 @@ export class BillsComponent implements OnInit{
     this.billApi.createBills(newBills)
       .then(
         bill => {
-          if (this.error) {
-            this.getBills();
-          } else {
-            this.bills.unshift(bill); //inserts new element at start of array
-            this.resetError(); //clears error message
-          }
+          this.toastr.info('Get By Id successful', 'Get bills by userid');
+    
+          this.bill = bill;
+          this.getBillsById();
+          
         },
         error => this.handleError(error) //handles error message
       );
   }
 
-
-}
+  }

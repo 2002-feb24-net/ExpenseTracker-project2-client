@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
 import Subscriptions from '../models/subscriptions';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-subscriptions',
@@ -11,10 +12,10 @@ import Subscriptions from '../models/subscriptions';
 })
 export class SubscriptionsComponent implements OnInit {
   subs: Subscriptions[] = [];
+  sub: Subscriptions;
   error: string | undefined;
   submitted = false;
-  UserID: number = 2; //CHANGE THIS LATER TO A COOKIE OR SOMETHING
-  createSubsForm = this.formBuilder.group({
+ createSubsForm = this.formBuilder.group({
     company: ['', Validators.required],
     subscriptionName: ['', Validators.required],
     subscriptionMonthCost: ['', Validators.required],
@@ -25,11 +26,12 @@ export class SubscriptionsComponent implements OnInit {
 
   constructor(
     private subApi: SubscriptionService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.getSubsByUserID();
+    this.getSubsByID();
   }
 
   handleError(error: HttpErrorResponse) {
@@ -42,9 +44,9 @@ export class SubscriptionsComponent implements OnInit {
   resetError() {
     this.error = undefined; //clears error message
   }
-  get f() { return this.createSubsForm.controls; }
-  getSubs() {
-    return this.subApi.getSubs()
+  // get f() { return this.createSubsForm.controls; }
+  getSubsByID() {
+    return this.subApi.getSubsByID()
       .then(
         subs => {
           this.subs = subs; //uses promises to accept the api response
@@ -58,7 +60,7 @@ export class SubscriptionsComponent implements OnInit {
   createSubs() {
     this.submitted = true;
     const newSubs: Subscriptions = {
-      userId: this.UserID,
+      userId: this.createSubsForm.get('userId')?.value,
       company: this.createSubsForm.get('company')?.value,
       subscriptionName: this.createSubsForm.get('subscriptionName')?.value,
       subscriptionMonthCost: this.createSubsForm.get('subscriptionMonthCost')?.value,
@@ -71,26 +73,27 @@ export class SubscriptionsComponent implements OnInit {
       .then(
         sub => {
           if (this.error) {
-            this.getSubs();
-          } else {
-            this.subs.unshift(sub); //inserts new element at start of array
-            this.resetError(); //clears error message
+            this.toastr.info('Get By Id successful', 'Get subs by userid');
+    
+          this.sub = sub;
+          this.getSubsByID();
+       
           }
         },
         error => this.handleError(error) //handles error message
       );
   }
-  getSubsByUserID()
-  {
-    return this.subApi.getSubsByUserID(this.UserID)
-      .then(
-        subs => {
-          this.subs = subs; //uses promises to accept the api response
-          this.resetError(); //resets error message
-        }, 
-        error => {
-          this.handleError(error); //handles error
-        } 
-      );
-  }
+  // getSubsByUserID()
+  // {
+  //   return this.subApi.getSubsByUserID(this.UserID)
+  //     .then(
+  //       subs => {
+  //         this.subs = subs; //uses promises to accept the api response
+  //         this.resetError(); //resets error message
+  //       }, 
+  //       error => {
+  //         this.handleError(error); //handles error
+  //       } 
+  //     );
+  // }
 }
