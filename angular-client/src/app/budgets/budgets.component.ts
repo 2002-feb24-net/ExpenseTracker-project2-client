@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, NgForm } from '@angular/forms';
 import { BudgetsService } from '../budgets.service';
+import { BillService } from '../bill.service'
 import Budgets from '../models/budgets';
+import  Bills  from '../models/bills'
 
 @Component({
   selector: 'app-budgets',
@@ -10,8 +12,14 @@ import Budgets from '../models/budgets';
   styleUrls: ['./budgets.component.css']
 })
 export class BudgetsComponent implements OnInit {
+  bills: Bills[] = [];
   budgets: Budgets[] = [];
+
+  budget: Budgets;
+  bill: Bills;
+
   error: string;
+  errorMessage: string
 
   createBudgetForm = this.formBuilder.group({
     userId : ['', Validators.required],
@@ -20,14 +28,15 @@ export class BudgetsComponent implements OnInit {
     subscription: ['', Validators.required],
     loan : ['', Validators.required],
   });
+  toastr: any;
 
   constructor(
-    private budgetsApi: BudgetsService,
+    public payBillService : BillService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.getBudgets();
+    this.resetForm()
   }
 
   handleError(error: HttpErrorResponse) {
@@ -41,8 +50,37 @@ export class BudgetsComponent implements OnInit {
     this.error = undefined; //clears error message
   }
 
-  getBudgets() {
-    return this.budgetsApi.getBudgets()
+  SubmitPay(f: NgForm) {
+    return this.payBillService.getBillById().then(
+      bill => {
+        // this.toastr.info("Get by id was OK", "Get bill by Id");
+        this.bill = bill;
+        console.log(this.bills)
+          console.log(f)
+      },
+      err => {
+        console.log(err);
+      }
+    )
+  }
+
+
+  populateForm(id) {
+    this.payBillService.formData = Object.assign({}, id);
+  }
+
+  resetForm(form?: NgForm) {
+    if(form != null)
+      form.form.reset();
+    this.payBillService.formData = {
+      id:  0,
+      userId: 0,
+      purchaseName: '',
+      quantity : 0,
+      cost: 0,
+      billDate : new Date(Date.now()),
+      location : '',
+    }
   }
 
 }

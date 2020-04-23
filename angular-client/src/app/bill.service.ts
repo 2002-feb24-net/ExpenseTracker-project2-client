@@ -9,6 +9,11 @@ import Bills from './models/bills';
 })
 export class BillService {
   //private baseUrl = environment.notesApiBaseUrl;
+
+  header: any;
+  formData:Bills;
+  list: Bills;
+
   private baseUrl = environment.ApiBaseUrl;
   constructor(private http: HttpClient) { }
   getBills() {
@@ -18,5 +23,9 @@ export class BillService {
   createBills(bill: Bills) {
     return this.http.post<Bills>(`${this.baseUrl}api/Bills`, bill)
       .toPromise();
+  }
+
+  getBillById() {
+    return this.http.get<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id).toPromise();
   }
 }
