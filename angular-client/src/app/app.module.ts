@@ -24,6 +24,7 @@ import {CookieService} from 'ngx-cookie-service'
 
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MembershipComponent } from './membership/membership.component';
+import { WebchartsComponent } from './webcharts/webcharts.component';
 
 
 @NgModule({
@@ -41,7 +42,9 @@ import { MembershipComponent } from './membership/membership.component';
 
     NotificationsComponent,
 
-    MembershipComponent
+    MembershipComponent,
+
+    WebchartsComponent
 
   ],
   imports: [

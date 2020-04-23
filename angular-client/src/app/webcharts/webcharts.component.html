@@ -1,0 +1,20 @@
+<div *ngIf="this.finished == false">
+<button style="position:absolute"(click)="CalculateTotals()">Generate Chart</button>
+</div>
+<div *ngIf="this.finished == true">
+    <a style="font-size: 200%;">Cost</a>
+    <img src ={{this.scriptString}} ><br>
+    <a style="font-size: 200%;margin-left:17em;">Months</a> <br>
+    <a style="font-size: 200%;margin-left:1em;">Suggestions:</a> <br>
+    <div style="font-size: 100%;margin-left:5em;">
+        <li>
+            <a>Most Expensive Month: {{this.months[this.LeastExpensiveMonth]}}</a> <br>
+        </li>
+        <li>
+            <a>Least Expensive Month: {{this.months[this.MostExpensiveMonth]}}</a> <br>
+        </li>
+        <li>
+            <a>Our analysts recommend spending less during {{this.months[this.MostExpensiveMonth]}} and cutting back on {{this.MostBoughtItem}} purchases.</a>
+        </li>
+    </div>
+</div>
