@@ -24,6 +24,7 @@ import { PageService } from './page.service';
 
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PayBillsComponent } from './pay-bills/pay-bills.component';
+import { SelectBillComponent } from './select-bill/select-bill.component';
 
 
 @NgModule({
@@ -41,7 +42,9 @@ import { PayBillsComponent } from './pay-bills/pay-bills.component';
 
     NotificationsComponent,
 
-    PayBillsComponent
+    PayBillsComponent,
+
+    SelectBillComponent
 
   ],
   imports: [

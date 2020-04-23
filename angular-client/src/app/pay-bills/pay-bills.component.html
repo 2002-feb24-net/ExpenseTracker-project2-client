@@ -1,9 +1,9 @@
 <div class="container" style="padding-top:60px;">
-    <div class="row">
-      <div class="col-md-6 mx-auto">
-        <div class="card-group">
-          <div class="card p-4">
-            <div class="card-body">
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
               
              
               <form name="form" #f="ngForm"  (ngSubmit)="SubmitPay(f)"  >
@@ -19,18 +19,19 @@
                 </div>
                 <div *ngIf="bills.length > 0">
                   <ul style="list-style-type: none;">
-                    <li *ngFor="let bill of bills">
-
-                      Bill Id {{this.bill.id}} <br>
-                      purchaseName: {{ this.bill.purchaseName }}  <br>
-                      quantity: {{ this.bill.quantity }}  <br>
-                      cost: {{ this.bill.cost }} <br> 
-                      billDate: {{ this.bill.billDate }}<br>
-                      location {{this.bill.location}} <br>
-                      <br>
-
+                    <li *ngFor="let bill of bills" style="float: left;">
+                    <div style="margin-left: 3%;">
+                    <br>
+                    Bill Id {{this.bill.id}} <br>
+                    purchaseName: {{ this.bill.purchaseName }}  <br>
+                    quantity: {{ this.bill.quantity }}  <br>
+                    cost: ${{ this.bill.cost }} <br> 
+                    location {{this.bill.location}} <br>
+                    <br>
+                  </div>
                     </li>
                   </ul>
+                  <app-select-bill style="float: none;"></app-select-bill>
                 </div>
 
                 <div *ngIf="bills.length === 0">
