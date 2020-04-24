@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class SubscriptionService {
   formData:Subscription;
   private baseUrl = environment.ApiBaseUrl;
-  constructor(private http: HttpClient,private CookieService: CookieService, private LoginService : LoginService,) { }
+  constructor(private http: HttpClient,private CookieService: CookieService) { }
  
   
   getSubsByID() {

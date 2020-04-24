@@ -1,4 +1,4 @@
-<div class="card-body p-4 text" align="center">
+<div class="card-body p-4 text"  style="text-align: center">
   <h1>Recent Subscriptions</h1>
 <div *ngIf="subs.length > 0">
   <table class="table table-hover table-dark"><thead><th scope="col">Uid</th><th scope="col">company</th><th scope="col">Sub. name</th>
@@ -15,7 +15,8 @@
                     <em class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteS(sub.id)"></em>
                   </td>
               </tr>
-            </table><caption>Subscriptions</caption>
+              <caption>Subscriptions</caption>
+            </table>
 </div>
 <div *ngIf="subs.length === 0">
     no subscriptions found

@@ -1,4 +1,4 @@
-<div class="card-body p-4 text" align="center">
+<div class="card-body p-4 text" style="text-align: center">
 <h1>Recent Bills</h1>
 <div >
   <div >
@@ -17,7 +17,8 @@
         <em class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteB(bill.id)"></em>
       </td>
       </tr>
-    </table><caption>recent bill</caption>
+      <caption>recent bill</caption>
+    </table>
 </div>
 <div *ngIf="bills.length === 0">
   no bills found
