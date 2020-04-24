@@ -36,10 +36,10 @@ export class UserService {
    return this.http.post<Users>(`${this.baseUrl}api/Users`, user)
      .toPromise();
  }
- getUsersUpdateById()
+ getUsersUpdateById(id:number)
  {
  const  data=this.CookieService.get('data');
-  return this.http.get<Users>(`${this.baseUrl}api/Users/${data}`)
+  return this.http.get<Users>(`${this.baseUrl}api/Users/${id}`)
   .toPromise();
  }
 UpdateUser(user: Users){
