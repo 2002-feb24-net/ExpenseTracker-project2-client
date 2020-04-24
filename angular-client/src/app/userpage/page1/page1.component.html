@@ -1,4 +1,5 @@
-<table class="table table-hover table-dark"><thead><th scope="col">name</th><th scope="col">Phone Number</th><th scope="col">address</th></thead>
+<table class="table table-hover table-dark"><caption>users</caption>
+  <thead><th scope="col">name</th><th scope="col">Phone Number</th><th scope="col">address</th></thead>
     <tr *ngFor="let u of service.list">
       <td (click)="populateForm(u)">{{u.name}}</td>
       <td (click)="populateForm(u)">{{u.phoneNumber}}</td>
@@ -8,5 +9,5 @@
       </td>
     </tr>
     
-  <caption>users</caption>
+
   </table>

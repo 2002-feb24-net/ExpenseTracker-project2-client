@@ -4,7 +4,8 @@
   <div >
     <div >
 <div *ngIf="bills.length > 0">
-  <table class="table table-hover table-dark"><thead> <th scope="col">Uid</th> <th scope="col">Purchase name</th>
+  <table class="table table-hover table-dark">
+    <caption>recent bill</caption><thead> <th scope="col">Uid</th> <th scope="col">Purchase name</th>
     <th scope="col">Quantity</th><th scope="col">cost</th> <th scope="col">bill date</th> <th scope="col">Location</th></thead>
     <tr  *ngFor="let bill of bills">
       <td (click)="populateForm(bill)"> {{ bill.userId }} </td>  
@@ -17,7 +18,7 @@
         <em class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteB(bill.id)"></em>
       </td>
       </tr>
-      <caption>recent bill</caption>
+     
     </table>
 </div>
 <div *ngIf="bills.length === 0">

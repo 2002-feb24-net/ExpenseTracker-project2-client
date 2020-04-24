@@ -1,7 +1,9 @@
 <div class="card-body p-4 text"  style="text-align: center">
   <h1>Recent Subscriptions</h1>
 <div *ngIf="subs.length > 0">
-  <table class="table table-hover table-dark"><thead><th scope="col">Uid</th><th scope="col">company</th><th scope="col">Sub. name</th>
+  <table class="table table-hover table-dark">
+    <caption>Subscriptions</caption>
+    <thead><th scope="col">Uid</th><th scope="col">company</th><th scope="col">Sub. name</th>
     <th scope="col">Sub. cost</th><th scope="col">Sub. date</th><th scope="col">due date</th><th scope="col">Notification</th></thead>
     <tr  *ngFor="let sub of subs">
       <td  (click)="populateForm(sub)"> {{ sub.userId }} </td> 
@@ -15,7 +17,7 @@
                     <em class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteS(sub.id)"></em>
                   </td>
               </tr>
-              <caption>Subscriptions</caption>
+            
             </table>
 </div>
 <div *ngIf="subs.length === 0">
