@@ -1,16 +1,16 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input, HostListener, InjectionToken } from '@angular/core';
 import { UserService } from '../user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
-
-
+import { NgModule } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-membership',
   templateUrl: './membership.component.html',
-  styleUrls: ['./membership.component.css']
+  styleUrls: ['./membership.component.css'],
+  providers: [FormBuilder,Validators,NgForm]
+  
 })
 
 export class MembershipComponent implements OnInit {
@@ -18,15 +18,15 @@ export class MembershipComponent implements OnInit {
   UserID: number = 2; //TEMP CHANGE THIS
   confirm: boolean = false;
   constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,public MemberService:UserService) { }
+    public MemberService:UserService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    this.UserID = Number(this.cookieService.get('UserID'));
     this.Login();
   }
   Login() {
     return  this.MemberService.getUsersUpdateById().then(
          user => {
-           this.toastr.info('Get By Id successfully', 'Get user by id');
            this.user = user;
          },
          err => {
