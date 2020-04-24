@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/user.service';
 import { NgForm } from '@angular/forms';
-import { PageService } from 'src/app/page.service';
+import { PageService } from 'src/app/services/page.service';
 
 @Component({
   selector: 'app-page2',
@@ -58,7 +57,7 @@ export class Page2Component implements OnInit {
     this.service.putUser().subscribe(
       res => {
         this.resetForm(form);
-        this.toastr.info('Submitted successfully', 'Payment Detail Register');
+        this.toastr.info('Submitted successfully', 'user updated');
         this.service.refreshList();
       },
       err => {

@@ -4,11 +4,11 @@ import { UsersComponent } from './users/users.component';
 import { BillsComponent } from './bills/bills.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { LoginComponent } from './login/login.component';
-
+import { MembershipComponent } from './membership/membership.component';
 import { UserpageComponent } from './userpage/userpage.component';
-
 import { NotificationsComponent } from './notifications/notifications.component';
-import { PayBillsComponent } from './pay-bills/pay-bills.component'
+import { PayBillsComponent } from './pay-bills/pay-bills.component';
+import { WebchartsComponent } from './webcharts/webcharts.component';
 
 
 const routes: Routes = [
@@ -17,12 +17,13 @@ const routes: Routes = [
   { path: 'Subs', component: SubscriptionsComponent },
 
   { path: 'Page', component: UserpageComponent },
-
+  { path: 'Membership', component: MembershipComponent },
 
   { path: 'Login', component: LoginComponent },
   { path: 'Notifications', component: NotificationsComponent },
-  { path: 'PayBill', component: PayBillsComponent }
+  { path: 'PayBill', component: PayBillsComponent },
 
+  { path: 'Webcharts' , component: WebchartsComponent }
 ];
 
 @NgModule({

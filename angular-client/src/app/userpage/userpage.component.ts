@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageService } from '../page.service';
+import { PageService } from '../services/page.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

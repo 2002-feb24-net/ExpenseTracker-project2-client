@@ -5,7 +5,7 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
-            <i class="fas fa-user-circle" [class.green-icon]="name.valid" [class.red-icon]="name.invalid && name.touched"></i>
+            <em class="fas fa-user-circle" [class.green-icon]="name.valid" [class.red-icon]="name.invalid && name.touched"></em>
           </div>
         </div>
         <input name="name" #name="ngModel" [(ngModel)]="service.formData.name" class="form-control"
@@ -16,7 +16,7 @@
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text bg-white">
-            <i class="fas fa-phone"  [class.green-icon]="phoneNumber.valid" [class.red-icon]="phoneNumber.invalid && phoneNumber.touched"></i>
+            <em class="fas fa-phone"  [class.green-icon]="phoneNumber.valid" [class.red-icon]="phoneNumber.invalid && phoneNumber.touched"></em>
           </div>
         </div>
         <input name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="service.formData.phoneNumber" 
@@ -28,7 +28,7 @@
         <div class="input-group">
           <div class="input-group-prepend">
             <div class="input-group-text bg-white">
-              <i class="fas fa-home"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></i>
+              <em class="fas fa-home"  [class.green-icon]="address.valid" [class.red-icon]="address.invalid && address.touched"></em>
             </div>
           </div>
           <input name="address" #address="ngModel" [(ngModel)]="service.formData.address" class="form-control"
@@ -38,6 +38,6 @@
     
     
     <div class="form-group">
-      <button class="btn btn-success btn-lg btn-block" type="submit" [disabled]="form.invalid"><i class="fas fa-database"></i> Update</button>
+      <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="form.invalid"><em class="fas fa-database"></em> Update</button>
     </div>
   </form>

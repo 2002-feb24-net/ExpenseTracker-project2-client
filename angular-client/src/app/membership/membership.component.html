@@ -1,0 +1,33 @@
+<div class="card-body p-4 text" style="text-align: center">
+<div class="container" style="padding-top:60px;">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+                <div *ngIf="this.user != undefined">
+                    <div *ngIf="this.user.membership == true">
+                        Purchase Complete
+                    </div>
+                    <div *ngIf="(this.user.membership === false && this.confirm === false)">
+                        Purchase Premium Membership:  <button id="purchase-button" (click)="openCheckout(); confirm = true;"> Purchase </button>
+                    </div>
+                    <div *ngIf="this.confirm === true">
+                        <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="pk_test_SasKUYWft8itac2sDa8JxpJY00mPgLFqdB"
+                        data-amount="2000"
+                        data-name="Membership"
+                        data-description="Monthly Subscription"
+                        data-locale="auto">
+                        </script>
+                        <button class="btn btn-block btn-primary" (click)="Purchase();"> Checkout </button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

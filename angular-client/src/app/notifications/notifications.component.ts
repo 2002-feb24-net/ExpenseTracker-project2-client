@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SubscriptionService } from '../subscription.service';
+import { SubscriptionService } from '../services/subscription.service';
 import Subscriptions from '../models/subscriptions';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-notifications',
@@ -9,17 +10,18 @@ import Subscriptions from '../models/subscriptions';
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
-  //need to change this later vvvvvv
-  UserID : number = 2; //temp
+  UserID : number =2; 
   subs: Subscriptions[] = [];
   error: string | undefined;
-  constructor(private subApi: SubscriptionService) { }
+  constructor(private subApi: SubscriptionService,private cookieService: CookieService) { }
 
   ngOnInit(): void {
-    this.getSubs();
+    this.UserID = Number(this.cookieService.get('UserID'));
+    this.getSubsByUserID();
   }
-  getSubs() {
-    return this.subApi.getSubs()
+  getSubsByUserID()
+  {
+    return this.subApi.getSubsByUserID(this.UserID)
       .then(
         subs => {
           this.subs = subs; //uses promises to accept the api response

@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { FormBuilder, Validators } from '@angular/forms';
+import { SubscriptionService } from '../services/subscription.service';
+import Subscriptions from '../models/subscriptions';
+import { CookieService } from 'ngx-cookie-service';
 import { SubscriptionsComponent } from './subscriptions.component';
+import { HttpErrorResponse, HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('SubscriptionsComponent', () => {
   let component: SubscriptionsComponent;
@@ -8,7 +13,8 @@ describe('SubscriptionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubscriptionsComponent ]
+      declarations: [ SubscriptionsComponent ],
+      providers: [SubscriptionService,HttpClient,HttpHandler,FormBuilder]
     })
     .compileComponents();
   }));

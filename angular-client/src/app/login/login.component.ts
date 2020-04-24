@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent  {
    users: Users[] = [];
-   
+  UserID: number | undefined;
   user : Users;
   error: string | undefined;
 
@@ -22,8 +24,8 @@ export class LoginComponent  {
     text: ['', Validators.required]
   });
  
-  constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,public LoginService:UserService) { }    
+  constructor(private formBuilder: FormBuilder,private router: Router,
+    private toastr: ToastrService,public LoginService:UserService,private cookieService: CookieService) { }    
 
   ngOnInit() {    
     this.resetForm();
@@ -67,8 +69,17 @@ export class LoginComponent  {
         this.toastr.info('Get By Id successfully', 'Get user by id');
         this.user = user;
         //console.log(users);
+        this.cookieService.set('UserID',`${this.user.id}`);
        console.log(this.users)
         console.log(f)
+        if(this.user.id == 24 && this.user.phoneNumber == "1234567890")
+  {
+    this.router.navigate(['/Page']);
+  }
+  else{
+    this.router.navigate(['/Bills']);
+  }
+   
       },
       err => {
         console.log(err);

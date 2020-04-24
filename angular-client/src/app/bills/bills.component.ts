@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BillService } from '../bill.service';
+import { BillService } from '../services/bill.service';
+import { CookieService } from 'ngx-cookie-service';
 import Bills from '../models/bills';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bills',
@@ -12,9 +14,8 @@ import Bills from '../models/bills';
 export class BillsComponent implements OnInit{
   bills: Bills[] = [];
   error: string | undefined;
-
+  UserID: number = Number(this.cookieService.get('UserID')); //TEMP VAR
   createBillsForm = this.formBuilder.group({
-    userId: ['', Validators.required],
     purchaseName: ['', Validators.required],
     quantity: ['', Validators.required],
     cost: ['', Validators.required],
@@ -23,12 +24,15 @@ export class BillsComponent implements OnInit{
   });
 
   constructor(
-    private billApi: BillService,
-    private formBuilder: FormBuilder
+    public billApi: BillService,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
-    this.getBills();
+   
+   
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -40,7 +44,23 @@ export class BillsComponent implements OnInit{
   resetError() {
     this.error = undefined; //clears error message
   }
+  populateForm(bill: Bills) {
+    this.billApi.formData = Object.assign({}, bill);
+  }
 
+  onDeleteB(id) {
+    if (confirm('Are you sure to delete this record ?')) {
+      this.billApi.deleteBillById(id)
+        .subscribe(res => {
+         
+        
+          this.toastr.warning('Deleted successfully', 'Subscription cancelled');
+        },
+          err => {
+            debugger;
+            console.log(err);
+          })
+    }}
   getBills() {
     return this.billApi.getBills()
       .then(
@@ -53,28 +73,38 @@ export class BillsComponent implements OnInit{
         } 
       );
   }
+  getBillsByUserID() {
+    return this.billApi.getBillsByUserID(this.UserID)
+      .then(
+        bills => {
+          this.bills = bills; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
+      );
+  }
   createBills() {
     const newBills: Bills = {
-      userId: this.createBillsForm.get('userId')?.value,
+      userId: this.UserID,
       purchaseName: this.createBillsForm.get('purchaseName')?.value,
       quantity: this.createBillsForm.get('quantity')?.value,
       cost: this.createBillsForm.get('cost')?.value,
-      billDate: this.createBillsForm.get('date')?.value,
+      billDate: this.createBillsForm.get('billDate')?.value,
       location: this.createBillsForm.get('location')?.value,
-      user: null
     };
+    console.log(newBills);
     this.billApi.createBills(newBills)
       .then(
         bill => {
           if (this.error) {
-            this.getBills();
-          } else {
-            this.bills.unshift(bill); //inserts new element at start of array
-            this.resetError(); //clears error message
-          }
+            this.getBillsByUserID();
+          } 
         },
         error => this.handleError(error) //handles error message
       );
+      //location.reload();
   }
 
 

@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import Users from '../models/users';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserService } from '../user.service';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-users',
@@ -17,11 +21,12 @@ export class UsersComponent implements OnInit {
   CreateUserForm = this.formBuilder.group({
     text: ['', Validators.required]
   });
-  router: any;
 
-  constructor(private formBuilder: FormBuilder, private userApi: UserService) { }
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private CookieService: CookieService, private userApi: LoginService,
+     private router: Router) { }
 
   ngOnInit(): void {
+    this.CookieService.deleteAll();
     this.CreateUserForm = this.formBuilder.group({
       name: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -70,7 +75,10 @@ export class UsersComponent implements OnInit {
         user => {
           if (this.error) {
             this.getUsers();
-           
+
+            this.router.navigate(['/Login']);
+           this.toastr.info('User Created', 'registered');
+    
           } else {
             this.users.unshift(user); //inserts new element at start of array
             this.resetError(); //clears error message
@@ -78,7 +86,7 @@ export class UsersComponent implements OnInit {
         },
         error => this.handleError(error) //handles error message
       );
-      this.router.navigate(['/login']);
+     
   }
 
 

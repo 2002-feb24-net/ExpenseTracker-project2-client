@@ -1,36 +1,47 @@
-<h1>Recent Subscriptions</h1>
+<div class="card-body p-4 text"  style="text-align: center">
+  <h1>Recent Subscriptions</h1>
 <div *ngIf="subs.length > 0">
-  <ol>
-    <li *ngFor="let sub of subs">
-        UserID: {{ sub.userId }} <br> 
-        Company: {{ sub.company }} <br> 
-        Purchase Name: {{ sub.subscriptionName }} <br> 
-        Monthly Cost: {{ sub.subscriptionMonthCost }} <br> 
-        Initial Subscription Date: {{ sub.subscriptionDate }} <br> 
-        Next Due Date: {{ sub.subscriptionDueDate }} <br> 
-        Notifications: {{ sub.notification }} <br> 
-    </li>
-  </ol>
+  <table class="table table-hover table-dark">
+    <caption>Subscriptions</caption>
+    <thead><th scope="col">Uid</th><th scope="col">company</th><th scope="col">Sub. name</th>
+    <th scope="col">Sub. cost</th><th scope="col">Sub. date</th><th scope="col">due date</th><th scope="col">Notification</th></thead>
+    <tr  *ngFor="let sub of subs">
+      <td  (click)="populateForm(sub)"> {{ sub.userId }} </td> 
+        <td (click)="populateForm(sub)" > {{ sub.company }} </td> 
+          <td  (click)="populateForm(sub)">{{ sub.subscriptionName }} </td> 
+            <td (click)="populateForm(sub)" > {{ sub.subscriptionMonthCost }} </td> 
+              <td  (click)="populateForm(sub)"> {{ sub.subscriptionDate }} </td> 
+                <td  (click)="populateForm(sub)"> {{ sub.subscriptionDueDate }} </td> 
+                  <td (click)="populateForm(sub)" > {{ sub.notification }} </td> 
+                  <td>
+                    <em class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteS(sub.id)"></em>
+                  </td>
+              </tr>
+            
+            </table>
 </div>
 <div *ngIf="subs.length === 0">
     no subscriptions found
   </div>
-  <button (click)="getSubs()">Refresh Subscriptions</button><br><br />
+  <button (click)="getSubsByUserID()">Refresh Subscriptions</button><br><br />
   <h1>Add Subscriptions: </h1>
   <form [formGroup]="createSubsForm" (ngSubmit)="createSubs()">
       <label>
-        Company Name:
-        <input type="text" formControlName="company" required> <br>
-        Purchase Name:
-        <input type="text" formControlName="subscriptionName" required> <br>
-        Monthly Cost:
-        <input type="number" formControlName="subscriptionMonthCost" required> <br>
-        Initial Date:
-        <input type="datetime-local" formControlName="subscriptionDate" required> <br>
-        Next Due Date:
-        <input type="datetime-local" formControlName="subscriptionDueDate" required> <br>
-        Notifications:
-        <input type="checkbox" formControlName="notification">
+        <div class="input-group mb-3"> user id:
+          <input type="text" formControlName="userId" required> </div>
+        <div class="input-group mb-3"> Company Name:
+        <input type="text" formControlName="company" required> </div>
+        <div class="input-group mb-3"> Purchase Name:
+        <input type="text" formControlName="subscriptionName" required> </div>
+        <div class="input-group mb-3"> Monthly Cost:
+        <input type="number" formControlName="subscriptionMonthCost" required> </div>
+        <div class="input-group mb-3"> Initial Date:
+        <input type="datetime-local" formControlName="subscriptionDate" required> </div>
+        <div class="input-group mb-3"> Next Due Date:
+        <input type="datetime-local" formControlName="subscriptionDueDate" required> </div>
+        <div class="input-group mb-3"> Notifications:
+        <input type="checkbox"  formControlName="notification">
+        <label class="form-check-label" for="notification">Check me out</label></div>
       </label>
         <br>
       <button type="submit" [disabled]="!createSubsForm.valid">Submit</button>
@@ -39,4 +50,5 @@
     <div *ngIf="error" class="error">
       {{ error }}
     </div>
+  </div>
   

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import Users from './models/users';
+import Users from '../models/users';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -32,6 +32,11 @@ export class LoginService {
   getUsersById(user : Users)
   {
    return this.http.get<Users[]>(this.Url + user.id)
+   .toPromise();
+  }
+  getUsersByUserId(id : number)
+  {
+   return this.http.get<Users[]>(this.Url + id)
    .toPromise();
   }
 }
