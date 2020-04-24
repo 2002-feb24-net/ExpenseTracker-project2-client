@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';

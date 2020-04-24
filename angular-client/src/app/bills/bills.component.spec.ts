@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse, HttpClient, HttpHandler } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BillService } from '../bill.service';
+import { BillService } from '../services/bill.service';
 import { CookieService } from 'ngx-cookie-service';
 import Bills from '../models/bills';
 
