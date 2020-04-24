@@ -1,1 +1,9 @@
-<p>budgets works!</p>
+<h1>Create a Budget</h1>
+
+<form [formGroup]="createBudgetForm" (ngSubmit)="createBudget()">
+    <label>
+        Salary:
+        <input type="number" fomrControlName="estamatedCost" required>
+    </label>
+    <button type="submit">Submit</button>
+</form>

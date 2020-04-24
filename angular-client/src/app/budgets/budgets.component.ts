@@ -16,7 +16,6 @@ export class BudgetsComponent implements OnInit {
   budget: Budgets;
 
   createBudgetForm = this.formBuilder.group ({
-    userId: ['', Validators.required],
     estamatedCost: ['', Validators.required],
     actualCost: ['', Validators.required],
     loans: ['', Validators.required],
