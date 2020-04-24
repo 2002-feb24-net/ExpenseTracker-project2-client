@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder, Validators } from '@angular/forms';
+import { HttpErrorResponse, HttpClient, HttpHandler } from '@angular/common/http';
 import { NotificationsComponent } from './notifications.component';
 
 describe('NotificationsComponent', () => {
@@ -8,7 +9,8 @@ describe('NotificationsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotificationsComponent ]
+      declarations: [ NotificationsComponent ],
+      providers: [HttpClient,HttpHandler,FormBuilder]
     })
     .compileComponents();
   }));

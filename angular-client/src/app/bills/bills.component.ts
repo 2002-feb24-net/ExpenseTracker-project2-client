@@ -24,7 +24,7 @@ export class BillsComponent implements OnInit{
   });
 
   constructor(
-    private billApi: BillService,
+    public billApi: BillService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private cookieService: CookieService
