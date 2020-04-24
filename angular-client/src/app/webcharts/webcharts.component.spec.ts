@@ -30,9 +30,9 @@ describe('WebchartsComponent', () => {
       userId: 1,
       purchaseName: "name",
       quantity: 2,
-      cost: this.createBillsForm.get('cost')?.value,
-      billDate: this.createBillsForm.get('billDate')?.value,
-      location: this.createBillsForm.get('location')?.value,
+      cost: 1,
+      billDate: new Date(),
+      location: "Here",
     }
     component.bills = bill;
     component.CalculateTotals();

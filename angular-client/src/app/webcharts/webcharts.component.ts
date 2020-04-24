@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
 import { BillService } from '../services/bill.service';
 import Bills from '../models/bills';
 import Data from '../models/data';
