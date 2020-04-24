@@ -24,7 +24,7 @@ export class WebchartsComponent implements OnInit {
   months:string[]  = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
   UserID: number = 2; //TEMP VAR
-  tempData: Data = { date: ``, totalcost: 0 , name: ''};
+  tempData: Data = { date: ' ', totalcost: 0 , name: ' '};
   changed: boolean;
   
   constructor(private billApi: BillService, private cookieService: CookieService) { }
