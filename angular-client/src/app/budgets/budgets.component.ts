@@ -4,6 +4,9 @@ import {BudgetsService } from '../budgets.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators, NgForm, FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SubscriptionService} from '../subscription.service'
+import Subscriptions from '../models/subscriptions';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-budgets',
@@ -12,20 +15,31 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BudgetsComponent implements OnInit {
   budgets: Budgets[] = [];
+
+  subs: Subscriptions[] = [];
+  sub: Subscriptions;
+  submitted  = false;
+
+  createBudgetForm =this.formBuilder.group({
+    text: ['', Validators.required]
+  })
+
   error: string | undefined;
   budget: Budgets;
 
-  createBudgetForm = this.formBuilder.group ({
-    estamatedCost: ['', Validators.required],
-    actualCost: ['', Validators.required],
-    loans: ['', Validators.required],
-    subscription: ['', Validators.required],
-  })
-
-  constructor(private budgetService: BudgetsService, private formBuilder: FormBuilder, private toastr: ToastrService) { }
+  constructor(private budgetService: BudgetsService,
+    private formBuilder: FormBuilder,
+     private toastr: ToastrService, 
+     private subService: SubscriptionService) { }
 
   ngOnInit(): void {
-    this.getBudgetsById();
+    this.createBudgetForm = this.formBuilder.group ({
+      userId: ['', Validators.required],
+      estamatedCost: ['', Validators.required],
+      actualCost: ['', Validators.required],
+      loans: ['', Validators.required],
+      subscription: ['', Validators.required],
+    });
   }
 
   handleError(error: HttpErrorResponse) {
@@ -51,37 +65,47 @@ export class BudgetsComponent implements OnInit {
       }
     );
   }
-  
-  // createBudget() {
-  //   const newBudget: Budgets = {
-  //     userId: this.createBudgetForm.get('userId')?.value,
-  //     estimatedCost: this.createBudgetForm.get('estamatedCost')?.value,
-  //     actualCost: this.createBudgetForm.get('actualCost')?.value,
-  //     loans: this.createBudgetForm.get('loans')?.value,
-  //     subscription: this.createBudgetForm.get('')?.value,
-  //     users: null,
-  // };
-  // this.budgetService.createBudget(newBudget)
-  // .th
 
   createBudget() {
+    this.submitted = true;
     const newBudget: Budgets = {
       userId: this.createBudgetForm.get('userId')?.value,
-       estimatedCost: this.createBudgetForm.get('estamatedCost')?.value,
+      estimatedCost: this.createBudgetForm.get('estamatedCost')?.value,
        actualCost: this.createBudgetForm.get('actualCost')?.value,
-      loans: this.createBudgetForm.get('loans')?.value,
-       subscription: this.createBudgetForm.get('')?.value,
-       users: null,
+        loans: this.createBudgetForm.get('loans')?.value,
+        subscription: this.createBudgetForm.get('subscription')?.value,
     };
+    console.log(newBudget);
     this.budgetService.createBudget(newBudget)
     .then(
       budget => {
-        this.toastr.info("yes", "yes");
-        this.budget = budget;
-        this.getBudgetsById();
+       if(this.error) {
+         this.getBudgetsById();
+       } else {
+         this.budgets.unshift(budget);
+         this.resetError();
+       }
       },
       error => this.handleError(error)
     );
+  //  var list =  this.getSubsByID();
+  //  JSON.stringify(list)
+    
+
   }
+
+  getSubsByID() {
+    return this.subService.getSubsByID()
+      .then(
+        subs => {
+          this.subs = subs; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
+      );
+  }
+
 
 }

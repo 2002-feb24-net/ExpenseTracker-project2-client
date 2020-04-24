@@ -2,8 +2,34 @@
 
 <form [formGroup]="createBudgetForm" (ngSubmit)="createBudget()">
     <label>
+        User Id:
+        <input type="number" formControlName="userId" required>
+        Esimated Cost:
+        <input type="number" formControlName="estamatedCost" required>
         Salary:
-        <input type="number" fomrControlName="estamatedCost" required>
+        <input type="number" formControlName="actualCost" required>
+        Sub:
+        <input type="text" formControlName="subscription" required>
+        Loans:
+        <input type="text" formControlName="loans" required>
+
+
     </label>
     <button type="submit">Submit</button>
+    <div *ngIf="subs.length > 0">
+        <ol>
+          <li *ngFor="let sub of subs">
+              UserID: {{ sub.userId }} <br> 
+              Company: {{ sub.company }} <br> 
+              Purchase Name: {{ sub.subscriptionName }} <br> 
+              Monthly Cost: {{ sub.subscriptionMonthCost }} <br> 
+              Initial Subscription Date: {{ sub.subscriptionDate }} <br> 
+              Next Due Date: {{ sub.subscriptionDueDate }} <br> 
+              Notifications: {{ sub.notification }} <br> 
+          </li>
+        </ol>
+      </div>
+      <div *ngIf="subs.length === 0">
+          no subscriptions found
+        </div>
 </form>
