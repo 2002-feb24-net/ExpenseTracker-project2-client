@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
 import Subscriptions from '../models/subscriptions';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-subscriptions',
@@ -15,6 +16,7 @@ export class SubscriptionsComponent implements OnInit {
   sub: Subscriptions;
   error: string | undefined;
   submitted = false;
+  UserID: number = 2;
  createSubsForm = this.formBuilder.group({
     company: ['', Validators.required],
     subscriptionName: ['', Validators.required],
@@ -27,11 +29,12 @@ export class SubscriptionsComponent implements OnInit {
   constructor(
     private subApi: SubscriptionService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
-    this.getSubsByID();
+    this.UserID = Number(this.cookieService.get('UserID'));
   }
 
   handleError(error: HttpErrorResponse) {
@@ -60,14 +63,13 @@ export class SubscriptionsComponent implements OnInit {
   createSubs() {
     this.submitted = true;
     const newSubs: Subscriptions = {
-      userId: this.createSubsForm.get('userId')?.value,
+      userId: this.UserID,
       company: this.createSubsForm.get('company')?.value,
       subscriptionName: this.createSubsForm.get('subscriptionName')?.value,
       subscriptionMonthCost: this.createSubsForm.get('subscriptionMonthCost')?.value,
       subscriptionDate: this.createSubsForm.get('subscriptionDate')?.value,
       subscriptionDueDate: this.createSubsForm.get('subscriptionDueDate')?.value,
       notification: this.createSubsForm.get('notification')?.value,
-      user: null
     };
     this.subApi.createSubs(newSubs)
       .then(
@@ -76,37 +78,24 @@ export class SubscriptionsComponent implements OnInit {
             this.toastr.info('Get By Id successful', 'Get subs by userid');
     
           this.sub = sub;
-           this.getSubsByUserID();
+          this.getSubsByUserID();
        
           }
         },
         error => this.handleError(error) //handles error message
       );
   }
-  getSubsByUserID()
-  {
-    return this.subApi.getSubsByUserID()
-      .then(
-        subs => {
-          this.subs = subs; //uses promises to accept the api response
-          this.resetError(); //resets error message
-        }, 
-        error => {
-          this.handleError(error); //handles error
-        } 
-      );
+ getSubsByUserID()
+ {
+   return this.subApi.getSubsByUserID(this.UserID)
+     .then(
+       subs => {
+         this.subs = subs; //uses promises to accept the api response
+         this.resetError(); //resets error message
+       }, 
+       error => {
+         this.handleError(error); //handles error
+       } 
+     );
   }
-  // onDeleteS(id) {
-  //   if (confirm('Are you sure to delete this record ?')) {
-  //     this.subApi.deleteS(id)
-  //       .subscribe(res => {
-  //         debugger;
-  //         this.toastr.warning('Deleted successfully', 'Payment Detail Register');
-  //       },
-  //         err => {
-  //           debugger;
-  //           console.log(err);
-  //         })
-  //   }
-  //   }
 }

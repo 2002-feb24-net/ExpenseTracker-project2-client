@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 
 import { CookieService } from 'ngx-cookie-service';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
 

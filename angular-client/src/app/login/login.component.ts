@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../login.service';
+import { UserService } from '../user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent  {
    users: Users[] = [];
-   submitted = false;
+  UserID: number | undefined;
   user : Users;
   error: string | undefined;
 
@@ -23,29 +24,18 @@ export class LoginComponent  {
     text: ['', Validators.required]
   });
  
- 
-  CreateUserForm = this.formBuilder.group({
-    text: ['', Validators.required]
-  });
-
-  constructor(private formBuilder: FormBuilder,
-    private toastr: ToastrService,private router: Router,public LoginService:LoginService,private CookieService: CookieService) { }    
+  constructor(private formBuilder: FormBuilder,private router: Router,
+    private toastr: ToastrService,public LoginService:UserService,private cookieService: CookieService) { }    
 
   ngOnInit() {    
-  this.resetForm();
-  this.CookieService.deleteAll();
-  this.CreateUserForm = this.formBuilder.group({
-    id: ['', Validators.required],
+    this.resetForm();
     
-    phoneNumber: ['', Validators.required],
-   
-});
   } 
 
-  get f() { return this.CreateUserForm.controls; }
+  populateForm(id) {
+    this.LoginService.formData = Object.assign({}, id);
+  }
 
-
- 
   // getUsersById(){
   //   return this.LoginService.getUsersById()
   //     .then(
@@ -73,17 +63,16 @@ export class LoginComponent  {
       membership: false,
     }
   }
-  Login() {
-    
-    this.submitted = true;
+  Login(f: NgForm) {
  return  this.LoginService.getUsersById().then(
       user => {
         this.toastr.info('Get By Id successfully', 'Get user by id');
-    
         this.user = user;
-        this.LoginService.setData(this.user.id);
-       
-if(this.user.id == 24 && this.user.phoneNumber == "1234567890")
+        //console.log(users);
+        this.cookieService.set('UserID',`${this.user.id}`);
+       console.log(this.users)
+        console.log(f)
+        if(this.user.id == 24 && this.user.phoneNumber == "1234567890")
   {
     this.router.navigate(['/Page']);
   }
@@ -92,10 +81,8 @@ if(this.user.id == 24 && this.user.phoneNumber == "1234567890")
   }
    
       },
-      error => {
-        this.toastr.error('wrong Id or Phone number', 'Get user by id');
-        this.handleError(error);
-        console.log(error);
+      err => {
+        console.log(err);
       }
     )
   }
@@ -121,8 +108,11 @@ if(this.user.id == 24 && this.user.phoneNumber == "1234567890")
     }
   }
 
-
-                                               
+  resetError() {
+    this.error = undefined; //clears error message
+  }
+                                                  //login method to be implemented
+   
   
       
 }

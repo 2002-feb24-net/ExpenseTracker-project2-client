@@ -55,7 +55,6 @@ import { WebchartsComponent } from './webcharts/webcharts.component';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
- 
   ],
   providers: [LoginService, PageService, CookieService],
   bootstrap: [AppComponent]

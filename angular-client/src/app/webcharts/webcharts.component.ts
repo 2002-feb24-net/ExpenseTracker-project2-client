@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { BillService } from '../bill.service';
 import Bills from '../models/bills';
 import Data from '../models/data';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-webcharts',
   templateUrl: './webcharts.component.html',
@@ -23,13 +23,14 @@ export class WebchartsComponent implements OnInit {
   scriptString: string = "";
   months:string[]  = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
- 
+  UserID: number = 2; //TEMP VAR
   tempData: Data = { date: ``, totalcost: 0 , name: ''};
   changed: boolean;
   
-  constructor(private billApi: BillService) { }
+  constructor(private billApi: BillService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    this.UserID = Number(this.cookieService.get('UserID'));
     this.getBillsByUserID();
   }
   StringBuilder()
@@ -80,7 +81,7 @@ export class WebchartsComponent implements OnInit {
     return comparison;
   }
   getBillsByUserID() {
-    return this.billApi.getBillsByUserID()
+    return this.billApi.getBillsByUserID(this.UserID)
       .then(
         bills => {
           this.bills = bills; //uses promises to accept the api response
