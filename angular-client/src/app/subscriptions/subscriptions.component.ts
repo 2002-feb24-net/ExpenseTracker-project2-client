@@ -15,6 +15,7 @@ export class SubscriptionsComponent implements OnInit {
   sub: Subscriptions;
   error: string | undefined;
   submitted = false;
+  UserID: number = 2;
  createSubsForm = this.formBuilder.group({
     company: ['', Validators.required],
     subscriptionName: ['', Validators.required],
@@ -31,7 +32,7 @@ export class SubscriptionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getSubsByID();
+    //this.getSubsByUserID();
   }
 
   handleError(error: HttpErrorResponse) {
@@ -60,14 +61,13 @@ export class SubscriptionsComponent implements OnInit {
   createSubs() {
     this.submitted = true;
     const newSubs: Subscriptions = {
-      userId: this.createSubsForm.get('userId')?.value,
+      userId: this.UserID,
       company: this.createSubsForm.get('company')?.value,
       subscriptionName: this.createSubsForm.get('subscriptionName')?.value,
       subscriptionMonthCost: this.createSubsForm.get('subscriptionMonthCost')?.value,
       subscriptionDate: this.createSubsForm.get('subscriptionDate')?.value,
       subscriptionDueDate: this.createSubsForm.get('subscriptionDueDate')?.value,
       notification: this.createSubsForm.get('notification')?.value,
-      user: null
     };
     this.subApi.createSubs(newSubs)
       .then(
@@ -76,24 +76,24 @@ export class SubscriptionsComponent implements OnInit {
             this.toastr.info('Get By Id successful', 'Get subs by userid');
     
           this.sub = sub;
-          this.getSubsByID();
+          this.getSubsByUserID();
        
           }
         },
         error => this.handleError(error) //handles error message
       );
   }
-  // getSubsByUserID()
-  // {
-  //   return this.subApi.getSubsByUserID(this.UserID)
-  //     .then(
-  //       subs => {
-  //         this.subs = subs; //uses promises to accept the api response
-  //         this.resetError(); //resets error message
-  //       }, 
-  //       error => {
-  //         this.handleError(error); //handles error
-  //       } 
-  //     );
-  // }
+ getSubsByUserID()
+ {
+   return this.subApi.getSubsByUserID(this.UserID)
+     .then(
+       subs => {
+         this.subs = subs; //uses promises to accept the api response
+         this.resetError(); //resets error message
+       }, 
+       error => {
+         this.handleError(error); //handles error
+       } 
+     );
+  }
 }
