@@ -24,4 +24,7 @@ describe('WebchartsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should build strings', () => {
+    expect(component.StringBuilder).toBeTruthy();
+  });
 });
