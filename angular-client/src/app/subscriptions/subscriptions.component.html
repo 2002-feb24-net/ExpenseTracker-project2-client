@@ -18,7 +18,7 @@
 <div *ngIf="subs.length === 0">
     no subscriptions found
   </div>
-  <button (click)="getSubsByID()">Refresh Subscriptions</button><br><br />
+  <button (click)="getSubsByUserID()">Refresh Subscriptions</button><br><br />
   <h1>Add Subscriptions: </h1>
   <form [formGroup]="createSubsForm" (ngSubmit)="createSubs()">
       <label>

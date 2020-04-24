@@ -30,7 +30,6 @@ export class BillsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.getBillsById();
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -43,33 +42,33 @@ export class BillsComponent implements OnInit{
     this.error = undefined; //clears error message
   }
 
-  getBillsById() {
-    return this.billApi.getBillsById()
-      .then(
-        bills => {
-     
-          this.bills = bills; //uses promises to accept the api response
-          this.resetError(); //resets error message
-         
-        }, 
-        error => {
-          this.handleError(error); //handles error
-        } 
-      );
-  }
-  // getBillsByUserID() {
-  //   return this.billApi.getBillsByUserID(this.UserID)
+  // getBillsById() {
+  //   return this.billApi.getBillsById()
   //     .then(
   //       bills => {
+     
   //         this.bills = bills; //uses promises to accept the api response
   //         this.resetError(); //resets error message
+         
   //       }, 
   //       error => {
   //         this.handleError(error); //handles error
   //       } 
   //     );
   // }
-  createBills() {
+  getBillsByUserID() {
+    return this.billApi.getBillsByUserID()
+      .then(
+        bills => {
+          this.bills = bills; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
+      );
+  }
+async createBills() {
     const newBills: Bills = {
       userId: this.createBillsForm.get('userId')?.value,
       purchaseName: this.createBillsForm.get('purchaseName')?.value,
@@ -79,13 +78,13 @@ export class BillsComponent implements OnInit{
       location: this.createBillsForm.get('location')?.value,
       user: null
     };
-    this.billApi.createBills(newBills)
+   await this.billApi.createBills(newBills)
       .then(
         bill => {
           this.toastr.info('Get By Id successful', 'Get bills by userid');
     
-          this.bill = bill;
-          this.getBillsById();
+          // this.bill = bill;
+          this.getBillsByUserID();
           
         },
         error => this.handleError(error) //handles error message

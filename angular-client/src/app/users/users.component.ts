@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { LoginService } from '../login.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class UsersComponent implements OnInit {
     text: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder, private CookieService: CookieService, private userApi: LoginService,
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService, private CookieService: CookieService, private userApi: LoginService,
      private router: Router) { }
 
   ngOnInit(): void {
@@ -74,7 +75,10 @@ export class UsersComponent implements OnInit {
         user => {
           if (this.error) {
             this.getUsers();
+
             this.router.navigate(['/Login']);
+           this.toastr.info('User Created', 'registered');
+    
           } else {
             this.users.unshift(user); //inserts new element at start of array
             this.resetError(); //clears error message

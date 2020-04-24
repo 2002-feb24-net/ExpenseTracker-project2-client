@@ -28,9 +28,12 @@ export class SubscriptionService {
     return this.http.post<Subscription>(`${this.baseUrl}api/Subscriptions`, sub)
       .toPromise();
   }
+
  
-  // getSubsByUserID(id: number){
-  //   return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions/userid=${id}`)
-  //     .toPromise();
-  // }
+  getSubsByUserID(){
+    const data=this.CookieService.get('data');
+    return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions/userid=${data}`)
+      .toPromise();
+  }
+
 }

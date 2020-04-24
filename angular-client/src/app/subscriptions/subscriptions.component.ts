@@ -76,26 +76,26 @@ export class SubscriptionsComponent implements OnInit {
             this.toastr.info('Get By Id successful', 'Get subs by userid');
     
           this.sub = sub;
-          this.getSubsByID();
+           this.getSubsByUserID();
        
           }
         },
         error => this.handleError(error) //handles error message
       );
   }
-  // getSubsByUserID()
-  // {
-  //   return this.subApi.getSubsByUserID(this.UserID)
-  //     .then(
-  //       subs => {
-  //         this.subs = subs; //uses promises to accept the api response
-  //         this.resetError(); //resets error message
-  //       }, 
-  //       error => {
-  //         this.handleError(error); //handles error
-  //       } 
-  //     );
-  // }
+  getSubsByUserID()
+  {
+    return this.subApi.getSubsByUserID()
+      .then(
+        subs => {
+          this.subs = subs; //uses promises to accept the api response
+          this.resetError(); //resets error message
+        }, 
+        error => {
+          this.handleError(error); //handles error
+        } 
+      );
+  }
   // onDeleteS(id) {
   //   if (confirm('Are you sure to delete this record ?')) {
   //     this.subApi.deleteS(id)

@@ -23,7 +23,7 @@ export class BillService {
     return this.http.get<Bills[]>(`${this.baseUrl}api/Bills`)
       .toPromise();
   }
-  createBills(bill: Bills) {
+ async createBills(bill: Bills) {
     return this.http.post<Bills>(`${this.baseUrl}api/Bills`, bill)
       .toPromise();
       
@@ -35,9 +35,10 @@ export class BillService {
    return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${data}`).toPromise();
  
   }
-
-  // getBillsByUserID(id: number){
-  //   return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${id}`)
-  //     .toPromise();
-  // }
+   getBillsByUserID(){
+    
+    const data=this.CookieService.get('data');
+    return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${data}`)
+      .toPromise();
+ }
 }
