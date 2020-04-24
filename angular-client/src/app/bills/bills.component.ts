@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BillService } from '../bill.service';
+import { CookieService } from 'ngx-cookie-service';
 import Bills from '../models/bills';
 
 @Component({
@@ -12,7 +13,7 @@ import Bills from '../models/bills';
 export class BillsComponent implements OnInit{
   bills: Bills[] = [];
   error: string | undefined;
-  UserID: number = 2; //TEMP VAR
+  UserID: number = Number(this.cookieService.get('UserID')); //TEMP VAR
   createBillsForm = this.formBuilder.group({
     purchaseName: ['', Validators.required],
     quantity: ['', Validators.required],
@@ -23,7 +24,8 @@ export class BillsComponent implements OnInit{
 
   constructor(
     private billApi: BillService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {

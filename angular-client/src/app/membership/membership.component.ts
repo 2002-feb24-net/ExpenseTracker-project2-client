@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-membership',
@@ -17,9 +18,10 @@ export class MembershipComponent implements OnInit {
   UserID: number = 2; //TEMP CHANGE THIS
   confirm: boolean = false;
   constructor(private formBuilder: FormBuilder,
-    public MemberService:UserService) { }
+    public MemberService:UserService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    this.UserID = Number(this.cookieService.get('UserID'));
     this.Login();
   }
   Login() {

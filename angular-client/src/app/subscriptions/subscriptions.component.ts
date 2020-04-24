@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
 import Subscriptions from '../models/subscriptions';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-subscriptions',
@@ -28,11 +29,12 @@ export class SubscriptionsComponent implements OnInit {
   constructor(
     private subApi: SubscriptionService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
-    //this.getSubsByUserID();
+    this.UserID = Number(this.cookieService.get('UserID'));
   }
 
   handleError(error: HttpErrorResponse) {

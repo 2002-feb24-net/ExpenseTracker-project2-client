@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { BillService } from '../bill.service';
 import Bills from '../models/bills';
 import Data from '../models/data';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-webcharts',
   templateUrl: './webcharts.component.html',
@@ -27,9 +27,10 @@ export class WebchartsComponent implements OnInit {
   tempData: Data = { date: ``, totalcost: 0 , name: ''};
   changed: boolean;
   
-  constructor(private billApi: BillService) { }
+  constructor(private billApi: BillService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    this.UserID = Number(this.cookieService.get('UserID'));
     this.getBillsByUserID();
   }
   StringBuilder()
