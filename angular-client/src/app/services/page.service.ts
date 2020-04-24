@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Users from './models/users';
+import Users from '../models/users';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -26,7 +26,7 @@ putUser() {
   return this.http.put<Users>(`${this.Url}api/Users/`+ this.formData.id, this.formData);
 }
 
-  deleteUser(id) {
+  deleteUser(id: number) {
     return this.http.delete<Users>(`${this.Url}api/Users/`+ id, { headers: this.header });
   }
 refreshList(){

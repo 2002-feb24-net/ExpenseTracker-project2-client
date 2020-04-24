@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SubscriptionService } from '../subscription.service';
+import { SubscriptionService } from '../services/subscription.service';
 import Subscriptions from '../models/subscriptions';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
@@ -35,6 +35,9 @@ export class SubscriptionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.UserID = Number(this.cookieService.get('UserID'));
+  }
+  populateForm(sub: Subscriptions) {
+    this.subApi.formData = Object.assign({}, sub);
   }
 
   handleError(error: HttpErrorResponse) {
@@ -98,4 +101,19 @@ export class SubscriptionsComponent implements OnInit {
        } 
      );
   }
+  onDeleteS(id) {
+    if (confirm('Are you sure to delete this record ?')) {
+      this.subApi.deleteSubById(id)
+        .subscribe(res => {
+          debugger;
+        
+          this.toastr.warning('Deleted successfully', 'Subscription cancelled');
+        },
+          err => {
+            debugger;
+            console.log(err);
+          })
+    }
+    }
+  
 }

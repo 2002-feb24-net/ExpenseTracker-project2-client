@@ -15,11 +15,11 @@ import { LoginComponent } from './login/login.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { Page1Component } from './userpage/page1/page1.component';
 import { Page2Component } from './userpage/page2/page2.component';
-import { LoginService } from './login.service';
+import { LoginService } from '../app/services/login.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
-import { PageService } from './page.service';
+import { PageService } from '../app/services/page.service';
 import {CookieService} from 'ngx-cookie-service'
 
 import { NotificationsComponent } from './notifications/notifications.component';

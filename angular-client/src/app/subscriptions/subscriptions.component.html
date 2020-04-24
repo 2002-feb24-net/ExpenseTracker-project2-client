@@ -4,14 +4,16 @@
   <table class="table table-hover table-dark"><thead><th>Uid</th><th>company</th><th>Sub. name</th>
     <th>Sub. cost</th><th>Sub. date</th><th>due date</th><th>Notification</th></thead>
     <tr  *ngFor="let sub of subs">
-      <td > {{ sub.userId }} </td> 
-        <td > {{ sub.company }} </td> 
-          <td >{{ sub.subscriptionName }} </td> 
-            <td > {{ sub.subscriptionMonthCost }} </td> 
-              <td > {{ sub.subscriptionDate }} </td> 
-                <td > {{ sub.subscriptionDueDate }} </td> 
-                  <td > {{ sub.notification }} </td> 
-               
+      <td  (click)="populateForm(sub)"> {{ sub.userId }} </td> 
+        <td (click)="populateForm(sub)" > {{ sub.company }} </td> 
+          <td  (click)="populateForm(sub)">{{ sub.subscriptionName }} </td> 
+            <td (click)="populateForm(sub)" > {{ sub.subscriptionMonthCost }} </td> 
+              <td  (click)="populateForm(sub)"> {{ sub.subscriptionDate }} </td> 
+                <td  (click)="populateForm(sub)"> {{ sub.subscriptionDueDate }} </td> 
+                  <td (click)="populateForm(sub)" > {{ sub.notification }} </td> 
+                  <td>
+                    <i class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteS(sub.id)"></i>
+                  </td>
               </tr>
             </table>
 </div>

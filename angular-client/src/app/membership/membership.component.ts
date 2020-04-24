@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, HostListener, InjectionToken } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 import Users from '../models/users';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({

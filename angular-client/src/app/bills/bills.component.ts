@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { BillService } from '../bill.service';
+import { BillService } from '../services/bill.service';
 import { CookieService } from 'ngx-cookie-service';
 import Bills from '../models/bills';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bills',
@@ -25,12 +26,13 @@ export class BillsComponent implements OnInit{
   constructor(
     private billApi: BillService,
     private formBuilder: FormBuilder,
+    private toastr: ToastrService,
     private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
    
-
+   
   }
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -42,7 +44,23 @@ export class BillsComponent implements OnInit{
   resetError() {
     this.error = undefined; //clears error message
   }
+  populateForm(bill: Bills) {
+    this.billApi.formData = Object.assign({}, bill);
+  }
 
+  onDeleteB(id) {
+    if (confirm('Are you sure to delete this record ?')) {
+      this.billApi.deleteBillById(id)
+        .subscribe(res => {
+         
+        
+          this.toastr.warning('Deleted successfully', 'Subscription cancelled');
+        },
+          err => {
+            debugger;
+            console.log(err);
+          })
+    }}
   getBills() {
     return this.billApi.getBills()
       .then(

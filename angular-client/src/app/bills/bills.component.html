@@ -7,12 +7,15 @@
   <table class="table table-hover table-dark"><thead><th>Uid</th><th>Purchase name</th>
     <th>Quantity</th><th>cost</th><th>bill date</th><th>Location</th></thead>
     <tr  *ngFor="let bill of bills">
-      <td > {{ bill.userId }} </td>  
-        <td > {{ bill.purchaseName }} </td>  
-          <td > {{ bill.quantity }} </td> 
-            <td > ${{ bill.cost }} </td> 
-              <td > {{ bill.billDate }} </td> 
-       <td> {{ bill.location }} </td> 
+      <td (click)="populateForm(bill)"> {{ bill.userId }} </td>  
+        <td (click)="populateForm(bill)"> {{ bill.purchaseName }} </td>  
+          <td (click)="populateForm(bill)"> {{ bill.quantity }} </td> 
+            <td (click)="populateForm(bill)"> ${{ bill.cost }} </td> 
+              <td (click)="populateForm(bill)"> {{ bill.billDate }} </td> 
+       <td (click)="populateForm(bill)"> {{ bill.location }} </td> 
+       <td>
+        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteB(bill.id)"></i>
+      </td>
       </tr>
     </table>
 </div>
