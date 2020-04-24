@@ -21,3 +21,30 @@ input.ng-valid{
 table tr:hover{
     cursor: pointer;
 }
+.mx-auto{
+    background-color: rgba(10, 89, 46, 0.6);
+}
+ .card-body{
+    background-color: rgba(10, 89, 46, 0.6);
+}
+.col-md-6 {
+    background-color: rgba(10, 89, 46, 0.6);
+}
+form{
+    color: white;
+    font-size: x-large;
+  
+}
+
+
+input{
+    display: inline-block;
+    text-align: left;
+  
+}
+.text, table, td{
+    font-size: large;
+    color: white;
+}
+
+

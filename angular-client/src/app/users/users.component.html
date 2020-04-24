@@ -1,9 +1,7 @@
-<h1>User Register</h1>
 
 <div class="container" style="padding-top:40px;">
     <div class="row">
-        <div class="col-md-6 mx-auto">
-            <div class="card mx-4">
+        
                 <div class="card-body p-4">
                     
                     <form [formGroup]="CreateUserForm" (ngSubmit)="CreateUser()">
@@ -11,51 +9,49 @@
 
 
                         <div class="input-group mb-3"> Name:
-                            <input type="text" class="form-control" placeholder="Insert Name" formControlName="name"
+                            <input type="text" class="form-control sty1"  placeholder="Insert Name" formControlName="name"
                                 required [ngClass]="{ 'is-invalid': submitted && f.name.errors}">
                                 <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                     <div *ngIf="f.name.errors.required">Name is required</div>
                                 </div>
                         </div>
                         <div class="input-group mb-3"> Password:
-                            <input type="password" class="form-control" placeholder="Insert 6 char Password"
+                            <input type="password" class="form-control sty1"  placeholder="Insert 6 char Password"
                                 formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors}">
                                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                     <div *ngIf="f.password.errors.required">Password is required</div>
                                 </div>
                         </div>
                         <div class="input-group mb-4"> Email:
-                            <input type="text" class="form-control" placeholder="Insert valid Email"
+                            <input type="text" class="form-control sty1"  placeholder="Insert valid Email"
                                 formControlName="email" required [ngClass]="{ 'is-invalid': submitted && f.email.errors}">
                                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                     <div *ngIf="f.email.errors.required">Email is required</div>
                                 </div>
                         </div>
                         <div class="input-group mb-4"> Phone Number:
-                            <input type="text" class="form-control" placeholder="Insert 10 digit Number"
+                            <input type="text" class="form-control sty1"  placeholder="Insert 10 digit Number"
                                 formControlName="phoneNumber" required [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors}" maxlength="10" minlength="10">
                                 <div *ngIf="submitted && f.PhoneNumber.errors" class="invalid-feedback">
                                     <div *ngIf="f.phoneNumber.errors.required">Number is required</div>
                                 </div>
                         </div>
                         <div class="input-group mb-4"> Address:
-                            <input type="text" class="form-control" placeholder="Insert Address"
+                            <input type="text" class="form-control sty1"  placeholder="Insert Address"
                                 formControlName="address" required [ngClass]="{ 'is-invalid': submitted && f.address.errors}">
                                 <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
                                     <div *ngIf="f.address.errors.required">Address is required</div>
                                 </div>
                         </div>
-                        <div class="input-group mb-4"> Membership:
-                            <input type="text" class="form-control" placeholder="Membership" >
-                        </div>
-                        <button type="submit" class="btn btn-block btn-success" >
+                    
+                        <button type="submit" class="btn btn-block btn-primary" >
                             User</button>
                     </form>
                     <div *ngIf="error" class="error">
                         {{ error }}
                     </div>
-                </div>
-            </div>
+               
+           
         </div>
     </div>
 </div>

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import Bills from './models/bills';
-import Users from './models/users';
-import { LoginService } from './login.service';
+import Bills from '../models/bills';
 import { CookieService } from 'ngx-cookie-service';
 
 
@@ -15,7 +13,7 @@ export class BillService {
   //private baseUrl = environment.notesApiBaseUrl;
   private baseUrl = environment.ApiBaseUrl;
 
-  constructor(private http: HttpClient,private CookieService: CookieService, private LoginService : LoginService) { }
+  constructor(private http: HttpClient,private CookieService: CookieService) { }
   formData:Bills;
   
   
@@ -38,5 +36,8 @@ export class BillService {
   getBillsByUserID(id: number){
      return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${id}`)
        .toPromise();
+  }
+  deleteBillById(id: number) {
+    return this.http.delete<Bills>(`${this.baseUrl}api/Bills/`+ id);
   }
 }

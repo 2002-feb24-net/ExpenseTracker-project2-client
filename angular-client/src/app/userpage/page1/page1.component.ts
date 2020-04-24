@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, EmailValidator } from '@angular/forms';
-import { PageService } from 'src/app/page.service';
+import { PageService } from '../../services/page.service';
 import { ToastrService } from 'ngx-toastr';
 import Users from 'src/app/models/users';
 
@@ -40,12 +40,12 @@ onDelete(id) {
   if (confirm('Are you sure to delete this record ?')) {
     this.service.deleteUser(id)
       .subscribe(res => {
-        debugger;
+
         this.service.refreshList();
-        this.toastr.warning('Deleted successfully', 'Payment Detail Register');
+        this.toastr.warning('Deleted successfully', 'user deleted');
       },
         err => {
-          debugger;
+   
           console.log(err);
         })
   }

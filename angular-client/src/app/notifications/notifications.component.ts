@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SubscriptionService } from '../subscription.service';
+import { SubscriptionService } from '../services/subscription.service';
 import Subscriptions from '../models/subscriptions';
 import { CookieService } from 'ngx-cookie-service';
 

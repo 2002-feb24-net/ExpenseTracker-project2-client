@@ -1,18 +1,25 @@
+<div class="card-body p-4 text" style="text-align: center">
 <h1>Recent Bills</h1>
 <div >
   <div >
     <div >
 <div *ngIf="bills.length > 0">
-  <ol>
-    <li *ngFor="let bill of bills">
-        UserID: {{ bill.userId }} <br> 
-        Item: {{ bill.purchaseName }} <br> 
-        Quantity: {{ bill.quantity }} <br>
-        Cost: ${{ bill.cost }} <br>
-        BillDate: {{ bill.billDate }} <br>
-        Location: {{ bill.location }} <br>
-    </li>
-  </ol>
+  <table class="table table-hover table-dark">
+    <caption>recent bill</caption><thead> <th scope="col">Uid</th> <th scope="col">Purchase name</th>
+    <th scope="col">Quantity</th><th scope="col">cost</th> <th scope="col">bill date</th> <th scope="col">Location</th></thead>
+    <tr  *ngFor="let bill of bills">
+      <td (click)="populateForm(bill)"> {{ bill.userId }} </td>  
+        <td (click)="populateForm(bill)"> {{ bill.purchaseName }} </td>  
+          <td (click)="populateForm(bill)"> {{ bill.quantity }} </td> 
+            <td (click)="populateForm(bill)"> ${{ bill.cost }} </td> 
+              <td (click)="populateForm(bill)"> {{ bill.billDate }} </td> 
+       <td (click)="populateForm(bill)"> {{ bill.location }} </td> 
+       <td>
+        <em class="far fa-trash-alt fa-lg text-danger" (click)="onDeleteB(bill.id)"></em>
+      </td>
+      </tr>
+     
+    </table>
 </div>
 <div *ngIf="bills.length === 0">
   no bills found
@@ -20,25 +27,41 @@
 <button (click)="getBillsByUserID()">Refresh Bills</button><br><br />
   <h1>Create New Bill: </h1>
 <form [formGroup]="createBillsForm" (ngSubmit)="createBills()">
+
     <label>
+    <div class="input-group mb-4">
+      User Id:
+      <input type="text" formControlName="userId" required> <br>
+    </div>
+    <div class="input-group mb-4">
       Purchase Name:
       <input type="text" formControlName="purchaseName" required> <br>
+    </div>
+    <div class="input-group mb-4">
       Quantity:
       <input type="number" formControlName="quantity" required> <br>
-      Cost:
+    </div>
+    <div class="input-group mb-4">
+      Cost :
       <input type="number" formControlName="cost" required> <br>
-      Date:
+    </div>
+    <div class="input-group mb-4">
+       Date:
       <input type="datetime-local" formControlName="billDate" required> <br>
-      Location:
+    </div>
+    <div class="input-group mb-4">
+       Location:
       <input type="text" formControlName="location" required>
+    </div>
     </label>
-  
-    <button type="submit" [disabled]="!createBillsForm.valid">Submit</button>
+  <br>
+    <button type="submit" class="btn btn-primary" [disabled]="!createBillsForm.valid">Submit</button>
   </form>
   
   <div *ngIf="error" class="error">
     {{ error }}
   </div>
+</div>
 </div>
 </div>
 </div>

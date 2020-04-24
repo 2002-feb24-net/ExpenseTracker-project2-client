@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import Subscription from './models/subscriptions';
-import { LoginService } from './login.service';
+import Subscription from '../models/subscriptions';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
@@ -11,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class SubscriptionService {
   formData:Subscription;
   private baseUrl = environment.ApiBaseUrl;
-  constructor(private http: HttpClient,private CookieService: CookieService, private LoginService : LoginService,) { }
+  constructor(private http: HttpClient,private CookieService: CookieService) { }
  
   
   getSubsByID() {
@@ -26,5 +25,8 @@ export class SubscriptionService {
   getSubsByUserID(id: number){
      return this.http.get<Subscription[]>(`${this.baseUrl}api/Subscriptions/userid=${id}`)
        .toPromise();
+  }
+  deleteSubById(id: number) {
+    return this.http.delete<Subscription>(`${this.baseUrl}api/Subscriptions/`+ id);
   }
 }
