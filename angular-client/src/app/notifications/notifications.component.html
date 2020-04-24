@@ -1,15 +1,16 @@
 <div class="card-body p-4 text" align="center">
 <h1>Notifications</h1>
 <div *ngIf="subs.length > 0">
-  <ol>
-    <a *ngFor="let sub of subs">
-        <li>
-        Company: {{ sub.company }} <br> 
-        Purchase Name: {{ sub.subscriptionName }} <br> 
-        Monthly Cost: {{ sub.subscriptionMonthCost }} <br> 
-        Next Due Date: {{ sub.subscriptionDueDate }} <br> 
-        </li>
-    </a>
-  </ol>
+  <table class="table table-hover table-dark"><thead><th>Company</th><th>Subs. name</th>
+    <th>Subs. month cost</th><th>Subs. due date</th></thead>
+    <tr *ngFor="let sub of subs">
+        
+          <td > {{ sub.company }}</td> 
+          <td > {{ sub.subscriptionName }}</td> 
+          <td >{{ sub.subscriptionMonthCost }}</td> 
+          <td > {{ sub.subscriptionDueDate }}</td> 
+      </tr>
+    </table>
+
 </div>
 </div>

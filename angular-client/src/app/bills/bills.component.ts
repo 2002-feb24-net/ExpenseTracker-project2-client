@@ -68,7 +68,7 @@ export class BillsComponent implements OnInit{
         } 
       );
   }
-async createBills() {
+ createBills() {
     const newBills: Bills = {
       userId: this.createBillsForm.get('userId')?.value,
       purchaseName: this.createBillsForm.get('purchaseName')?.value,
@@ -78,7 +78,7 @@ async createBills() {
       location: this.createBillsForm.get('location')?.value,
       user: null
     };
-   await this.billApi.createBills(newBills)
+   this.billApi.createBills(newBills)
       .then(
         bill => {
           this.toastr.info('Get By Id successful', 'Get bills by userid');
