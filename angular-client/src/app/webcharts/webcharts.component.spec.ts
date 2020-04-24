@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder, Validators } from '@angular/forms';
+import { HttpErrorResponse, HttpClient, HttpHandler } from '@angular/common/http';
 import { WebchartsComponent } from './webcharts.component';
 
 describe('WebchartsComponent', () => {
@@ -8,7 +9,8 @@ describe('WebchartsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WebchartsComponent ]
+      declarations: [ WebchartsComponent ],
+      providers: [HttpClient,HttpHandler,FormBuilder]
     })
     .compileComponents();
   }));

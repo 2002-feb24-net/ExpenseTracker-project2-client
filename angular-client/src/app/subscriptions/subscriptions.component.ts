@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SubscriptionService } from '../subscription.service';
 import Subscriptions from '../models/subscriptions';
-import { ToastrService } from 'ngx-toastr';
+//import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -29,7 +29,7 @@ export class SubscriptionsComponent implements OnInit {
   constructor(
     private subApi: SubscriptionService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService,
+    //private toastr: ToastrService,
     private cookieService: CookieService
   ) { }
 
@@ -75,7 +75,7 @@ export class SubscriptionsComponent implements OnInit {
       .then(
         sub => {
           if (this.error) {
-            this.toastr.info('Get By Id successful', 'Get subs by userid');
+            //this.toastr.info('Get By Id successful', 'Get subs by userid');
     
           this.sub = sub;
           this.getSubsByUserID();

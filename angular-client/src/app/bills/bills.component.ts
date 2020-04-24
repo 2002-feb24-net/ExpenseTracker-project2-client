@@ -23,7 +23,7 @@ export class BillsComponent implements OnInit{
   });
 
   constructor(
-    private billApi: BillService,
+    public billApi: BillService,
     private formBuilder: FormBuilder,
     private cookieService: CookieService
   ) { }
