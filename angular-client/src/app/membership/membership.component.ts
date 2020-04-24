@@ -21,7 +21,7 @@ export class MembershipComponent implements OnInit {
     public MemberService:UserService, private cookieService: CookieService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.UserID = 32;
+    this.UserID = Number(this.cookieService.get('UserID'));
     this.Login();
   }
   Login() {
