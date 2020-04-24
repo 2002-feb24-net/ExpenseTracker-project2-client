@@ -24,7 +24,6 @@ import { PageService } from './page.service';
 
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PayBillsComponent } from './pay-bills/pay-bills.component';
-import { BillService } from './bill.service';
 
 
 @NgModule({
@@ -56,7 +55,7 @@ import { BillService } from './bill.service';
     ToastrModule.forRoot()
  
   ],
-  providers: [UserService, PageService, BillService],
+  providers: [UserService, PageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

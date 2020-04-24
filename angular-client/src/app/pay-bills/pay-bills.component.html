@@ -53,6 +53,10 @@
                       </p>
                     </div>  
                   </form>
+                  <p>Enterr price</p>
+                  <input type="number" id="id" ngModel [(ngModel)]="userPay">
+                  <button type="submit" class="btn btn-primary px-4" style="float:right">Pay Bill</button>
+                </div>
 
                 <div *ngIf="bills.length === 0">
                   no bills found
