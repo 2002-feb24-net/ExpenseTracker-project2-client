@@ -1,7 +1,8 @@
 <div class="card-body p-4 text"  style="text-align: center">
 <h1>Notifications</h1>
 <div *ngIf="subs.length > 0">
-  <table class="table table-hover table-dark"><thead><th scope="col">Company</th><th scope="col">Subs. name</th>
+  <table class="table table-hover table-dark"><caption>Notification</caption>
+    <thead><th scope="col">Company</th><th scope="col">Subs. name</th>
     <th scope="col">Subs. month cost</th><th scope="col">Subs. due date</th></thead>
     <tr *ngFor="let sub of subs">
         
@@ -10,7 +11,7 @@
           <td >{{ sub.subscriptionMonthCost }}</td> 
           <td > {{ sub.subscriptionDueDate }}</td> 
       </tr>
-      <caption>Notification</caption>
+     
     </table>
    
 
