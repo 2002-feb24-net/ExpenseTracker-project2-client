@@ -1,0 +1,70 @@
+<div class="container" style="padding-top:60px;">
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
+              
+             
+              
+                <h1 style="text-align:center">Enter User ID</h1>
+  
+                <input type="text" name="UserId" ngModel [(ngModel)]="PayBillService.formData.id"  class="form-control sty1" style="width: 70%; float: left;" placeholder="User Id" required>
+                <button (click)="getBills()" type="button" class="btn btn-primary px-4" style="float:right" >Enter</button>
+                <br>
+                <div>
+                  <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
+                    {{errorMessage}}
+                  </p>
+                </div>
+                <div *ngIf="bills.length > 0">
+                  <div style="margin-bottom: 5%;">
+                    <br>
+                    <h3>List of Bills</h3>
+                    <br><br>
+                  <ul style="list-style-type: none;">
+                    <li *ngFor="let bill of bills" style="float: left;">
+                    <div style="margin-left: 3%;">
+                        <br>
+                        Bill Id {{this.bill.id}} <br>
+                        purchaseName: {{ this.bill.purchaseName }}  <br>
+                        quantity: {{ this.bill.quantity }}  <br>
+                        cost: ${{ this.bill.cost }} <br> 
+                        location {{this.bill.location}} <br>
+                        <br>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div style="margin-right: 52%;">
+                  <p>Enter a bill Id:</p>
+                  <input type="number" ngModel [(ngModel)]="PayBillService.formData.id" name="id" (keyup)="onKey($event)">
+                </div>
+                <div>
+                  <form name="form" #f="ngForm"  (ngSubmit)="SubmitPay(f)"  >
+                    <h1 style="text-align:center">Enter B ID</h1>
+    
+                    <input type="number" name="id" ngModel [(ngModel)]="userPay"  class="form-control sty1" style="width: 70%; float: left;" placeholder="Bill Id" required>
+                    <button type="submit" class="btn btn-primary px-4" style="float:right">Enter</button>
+                    <br>
+                    <div>
+                      <p style="color:#E92626;font-size:20px;font-weight:normal" Class="success" align="left">
+                        {{errorMessage}}
+                      </p>
+                    </div>  
+                  </form>
+                  <p>Enterr price</p>
+                  <input type="number" id="id" ngModel [(ngModel)]="userPay">
+                  <button type="submit" class="btn btn-primary px-4" style="float:right">Pay Bill</button>
+                </div>
+
+                <div *ngIf="bills.length === 0">
+                  no bills found
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

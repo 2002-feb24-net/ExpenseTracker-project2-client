@@ -23,6 +23,7 @@ import { PageService } from '../app/services/page.service';
 import {CookieService} from 'ngx-cookie-service'
 
 import { NotificationsComponent } from './notifications/notifications.component';
+import { PayBillsComponent } from './pay-bills/pay-bills.component';
 import { MembershipComponent } from './membership/membership.component';
 import { WebchartsComponent } from './webcharts/webcharts.component';
 
@@ -41,6 +42,8 @@ import { WebchartsComponent } from './webcharts/webcharts.component';
     Page2Component,
 
     NotificationsComponent,
+
+    PayBillsComponent,
 
     MembershipComponent,
 

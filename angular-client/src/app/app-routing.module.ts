@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { MembershipComponent } from './membership/membership.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { PayBillsComponent } from './pay-bills/pay-bills.component';
 import { WebchartsComponent } from './webcharts/webcharts.component';
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
 
   { path: 'Login', component: LoginComponent },
   { path: 'Notifications', component: NotificationsComponent },
+  { path: 'PayBill', component: PayBillsComponent },
 
   { path: 'Webcharts' , component: WebchartsComponent }
 ];
