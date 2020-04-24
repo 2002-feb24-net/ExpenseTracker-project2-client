@@ -9,7 +9,7 @@ import { UserpageComponent } from './userpage/userpage.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { PayBillsComponent } from './pay-bills/pay-bills.component';
 import { WebchartsComponent } from './webcharts/webcharts.component';
-
+import { BudgetsComponent } from './budgets/budgets.component';
 
 const routes: Routes = [
   { path: '', component: UsersComponent },
@@ -23,7 +23,8 @@ const routes: Routes = [
   { path: 'Notifications', component: NotificationsComponent },
   { path: 'PayBills', component: PayBillsComponent },
 
-  { path: 'Webcharts' , component: WebchartsComponent }
+  { path: 'Webcharts' , component: WebchartsComponent },
+  { path: "Budgets", component: BudgetsComponent }
 ];
 
 @NgModule({

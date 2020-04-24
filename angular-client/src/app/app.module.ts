@@ -26,6 +26,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { PayBillsComponent } from './pay-bills/pay-bills.component';
 import { MembershipComponent } from './membership/membership.component';
 import { WebchartsComponent } from './webcharts/webcharts.component';
+import { BudgetsComponent } from './budgets/budgets.component';
 
 
 @NgModule({
@@ -47,7 +48,9 @@ import { WebchartsComponent } from './webcharts/webcharts.component';
 
     MembershipComponent,
 
-    WebchartsComponent
+    WebchartsComponent,
+
+    BudgetsComponent
 
   ],
   imports: [

@@ -1,0 +1,43 @@
+
+
+<div class="container" style="padding-top:40px;">
+    <div class="row">
+        
+                <div class="card-body p-4">
+                    <h1 style>Create a Budget</h1>
+<form [formGroup]="createBudgetForm" (ngSubmit)="createBudget()">
+    <label>
+        User Id:
+        <input type="number" formControlName="userId" required> <br>
+        Esimated Cost:
+        <input type="number" formControlName="estamatedCost" required> <br>
+        Salary:
+        <input type="number" formControlName="actualCost" required> <br>
+        Sub:
+        <input type="text" formControlName="subscription" required> <br>
+        Loans:
+        <input type="text" formControlName="loans" required> <br>
+
+
+    </label>
+    <button type="submit">Submit</button>
+    <div *ngIf="subs.length > 0">
+        <ol>
+          <li *ngFor="let sub of subs">
+              UserID: {{ sub.userId }} <br> 
+              Company: {{ sub.company }} <br> 
+              Purchase Name: {{ sub.subscriptionName }} <br> 
+              Monthly Cost: {{ sub.subscriptionMonthCost }} <br> 
+              Initial Subscription Date: {{ sub.subscriptionDate }} <br> 
+              Next Due Date: {{ sub.subscriptionDueDate }} <br> 
+              Notifications: {{ sub.notification }} <br> 
+          </li>
+        </ol>
+      </div>
+      <div *ngIf="subs.length === 0">
+          no subscriptions found
+        </div>
+</form>
+</div>
+</div>
+</div>
