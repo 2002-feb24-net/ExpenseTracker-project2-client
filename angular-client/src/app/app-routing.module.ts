@@ -8,6 +8,7 @@ import { MembershipComponent } from './membership/membership.component';
 import { UserpageComponent } from './userpage/userpage.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { WebchartsComponent } from './webcharts/webcharts.component';
+import { BudgetsComponent } from './budgets/budgets.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,9 @@ const routes: Routes = [
   { path: 'Login', component: LoginComponent },
   { path: 'Notifications', component: NotificationsComponent },
 
-  { path: 'Webcharts' , component: WebchartsComponent }
+  { path: 'Webcharts' , component: WebchartsComponent },
+  { path: "Budgets", component: BudgetsComponent }
+
 ];
 
 @NgModule({
