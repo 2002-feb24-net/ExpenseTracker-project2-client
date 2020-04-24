@@ -33,11 +33,18 @@ export class BillService {
    return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${data}`).toPromise();
  
   }
+  getBillById() {
+    return this.http.get<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id)
+    .toPromise();
+  }
   getBillsByUserID(id: number){
      return this.http.get<Bills[]>(`${this.baseUrl}api/Bills/userid=${id}`)
        .toPromise();
   }
   deleteBillById(id: number) {
     return this.http.delete<Bills>(`${this.baseUrl}api/Bills/`+ id);
+  }
+  putBill() {
+    return this.http.put<Bills>(`${this.baseUrl}api/Bills/` + this.formData.id, this.formData);
   }
 }

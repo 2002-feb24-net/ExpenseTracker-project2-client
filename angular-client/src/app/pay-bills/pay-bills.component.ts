@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BillService } from '../bill.service';
+import { BillService } from '../services/bill.service';
 import Bills from '../models/bills';
 import { FormBuilder,  Validators, NgForm } from '@angular/forms';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';

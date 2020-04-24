@@ -21,7 +21,7 @@ const routes: Routes = [
 
   { path: 'Login', component: LoginComponent },
   { path: 'Notifications', component: NotificationsComponent },
-  { path: 'PayBill', component: PayBillsComponent },
+  { path: 'PayBills', component: PayBillsComponent },
 
   { path: 'Webcharts' , component: WebchartsComponent }
 ];
