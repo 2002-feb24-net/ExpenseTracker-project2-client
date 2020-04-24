@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 export class MembershipComponent implements OnInit {
   user: Users;
-  UserID: number = 2; //TEMP CHANGE THIS
+  UserID: number; //TEMP CHANGE THIS
   confirm: boolean = false;
   constructor(private formBuilder: FormBuilder,
     public MemberService:UserService, private cookieService: CookieService) { }
